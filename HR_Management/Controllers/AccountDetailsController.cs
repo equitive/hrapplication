@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Identity;
+using HR_Management.Models;
 namespace HR_Management.Controllers
 {
     public class AccountDetailsController : Controller
     {
-		public IActionResult AccountOverview()
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public AccountDetailsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+		public async Task<IActionResult> AccountOverview()
 		{
 			ViewData["Message"] = "Employee application account overview page upon login.";
-
-			return View();
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            return View();
 		}
 
 		public IActionResult AccountOverviewEditView()
@@ -40,5 +52,9 @@ namespace HR_Management.Controllers
 		{
 			return View();
 		}
+        private Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
     }
 }
