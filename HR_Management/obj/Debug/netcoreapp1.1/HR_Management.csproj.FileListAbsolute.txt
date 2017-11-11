@@ -1,0 +1,43 @@
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.deps.json
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.json
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.dev.json
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.dll
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.pdb
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.csprojResolveAssemblyReference.cache
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.AssemblyInfo.cs
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.dll
+c:/users/lajroni/documents/visual studio 2017/Projects/HR_Management/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.pdb
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.deps.json
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.json
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.dev.json
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.dll
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.pdb
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.csprojResolveAssemblyReference.cache
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.csproj.CoreCompileInputs.cache
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.AssemblyInfo.cs
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.dll
+C:/Users/rpetitbo/Documents/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.pdb
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.deps.json
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.json
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.runtimeconfig.dev.json
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.dll
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/bin/Debug/netcoreapp1.1/HR_Management.pdb
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.csprojResolveAssemblyReference.cache
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.csproj.CoreCompileInputs.cache
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.AssemblyInfoInputs.cache
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.AssemblyInfo.cs
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.dll
+/Users/ruthpetit-bois/Projects/testhrapplication/hrapplication/HR_Management/obj/Debug/netcoreapp1.1/HR_Management.pdb
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\bin\Debug\netcoreapp1.1\HR_Management.deps.json
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\bin\Debug\netcoreapp1.1\HR_Management.runtimeconfig.json
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\bin\Debug\netcoreapp1.1\HR_Management.runtimeconfig.dev.json
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\bin\Debug\netcoreapp1.1\HR_Management.dll
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\bin\Debug\netcoreapp1.1\HR_Management.pdb
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\obj\Debug\netcoreapp1.1\HR_Management.AssemblyInfo.cs
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\obj\Debug\netcoreapp1.1\HR_Management.dll
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\obj\Debug\netcoreapp1.1\HR_Management.pdb
+C:\Users\lajroni\Desktop\hrapplication-master\HR_Management\obj\Debug\netcoreapp1.1\HR_Management.csprojResolveAssemblyReference.cache

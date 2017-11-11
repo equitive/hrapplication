@@ -1,0 +1,66 @@
+﻿<Properties StartupConfiguration="{960D5028-0230-4319-9E0B-C5BF8D97BF99}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HR_Management/Views/Reviews/ViewReview.cshtml">
+    <Files>
+      <File FileName="HR_Management/Views/AccountDetails/AccountOverview.cshtml" Line="5" Column="49" />
+      <File FileName="HR_Management/Views/AccountDetails/AccountOverviewEditView.cshtml" Line="5" Column="9" />
+      <File FileName="HR_Management/Views/AccountDetails/EditAccountOverviewEmployee.cshtml" Line="4" Column="9" />
+      <File FileName="HR_Management/Views/AccountDetails/ManagerAccountOverview.cshtml" Line="5" Column="88" />
+      <File FileName="HR_Management/Views/Company/ComplaintsList.cshtml" Line="5" Column="61" />
+      <File FileName="HR_Management/Views/Company/EmployeeList.cshtml" Line="22" Column="13" />
+      <File FileName="HR_Management/Views/Company/PositionsList.cshtml" Line="2" Column="35" />
+      <File FileName="HR_Management/Views/Company/ReviewsList.cshtml" Line="5" Column="66" />
+      <File FileName="HR_Management/Views/Company/TimeOffList.cshtml" Line="5" Column="69" />
+      <File FileName="HR_Management/Views/Complaints/AddComplaint.cshtml" Line="2" Column="39" />
+      <File FileName="HR_Management/Views/Complaints/ComplaintsIndex.cshtml" Line="4" Column="58" />
+      <File FileName="HR_Management/Views/Complaints/ComplaintsIndexManager.cshtml" Line="5" Column="73" />
+      <File FileName="HR_Management/Views/Complaints/EditComplaint.cshtml" Line="5" Column="61" />
+      <File FileName="HR_Management/Views/Complaints/EditComplaintStatus.cshtml" Line="5" Column="117" />
+      <File FileName="HR_Management/Views/Complaints/OutstandingComplaints.cshtml" Line="5" Column="83" />
+      <File FileName="HR_Management/Views/Positions/:Users:ruthpetit-bois:Projects:testhrapplication:hrapplication:HR_Management:Views:Complaints:TeamMemberComplaints.cshtml" Line="5" Column="78" />
+      <File FileName="HR_Management/Views/Complaints/ViewComplaint.cshtml" Line="2" Column="41" />
+      <File FileName="HR_Management/Views/Home/Index.cshtml" Line="12" Column="109" />
+      <File FileName="HR_Management/Views/Messages/AddMessage.cshtml" Line="5" Column="29" />
+      <File FileName="HR_Management/Views/Shared/_Layout.cshtml" Line="46" Column="49" />
+      <File FileName="HR_Management/Controllers/AccountController.cs" Line="45" Column="31" />
+      <File FileName="HR_Management/Views/Messages/MessagesIndex.cshtml" Line="5" Column="82" />
+      <File FileName="HR_Management/Views/Messages/MessagesIndexManager.cshtml" Line="6" Column="1" />
+      <File FileName="HR_Management/Views/Messages/ViewMessage.cshtml" Line="6" Column="5" />
+      <File FileName="HR_Management/Views/Rankings/CompanyRankingIndex.cshtml" Line="5" Column="94" />
+      <File FileName="HR_Management/Views/Rankings/DepartmentRankingIndex.cshtml" Line="5" Column="87" />
+      <File FileName="HR_Management/Views/Settings/QuitJob.cshtml" Line="5" Column="84" />
+      <File FileName="HR_Management/Views/Settings/SettingsOverview.cshtml" Line="5" Column="71" />
+      <File FileName="HR_Management/Views/Positions/AddPosition.cshtml" Line="5" Column="29" />
+      <File FileName="HR_Management/Views/Positions/PositionsIndex.cshtml" Line="5" Column="84" />
+      <File FileName="HR_Management/Views/Positions/PositionsIndexManager.cshtml" Line="5" Column="100" />
+      <File FileName="HR_Management/Views/Positions/TeamMemberPosition.cshtml" Line="2" Column="37" />
+      <File FileName="HR_Management/Views/Positions/TeamPositionRequests.cshtml" Line="5" Column="103" />
+      <File FileName="HR_Management/Views/Positions/TeamPositions.cshtml" Line="5" Column="100" />
+      <File FileName="HR_Management/Views/Teams/EditTeamMember.cshtml" Line="6" Column="1" />
+      <File FileName="HR_Management/Views/Teams/ViewTeamMember.cshtml" Line="5" Column="177" />
+      <File FileName="HR_Management/Views/Teams/ViewTeam.cshtml" Line="5" Column="33" />
+      <File FileName="HR_Management/Views/Teams/ViewTeamManager.cshtml" Line="5" Column="81" />
+      <File FileName="HR_Management/Views/TimeOff/AddTimeOff.cshtml" Line="2" Column="33" />
+      <File FileName="HR_Management/Views/TimeOff/EditTimeOff.cshtml" Line="5" Column="82" />
+      <File FileName="HR_Management/Views/TimeOff/ExceedingTimeOff.cshtml" Line="5" Column="195" />
+      <File FileName="HR_Management/Views/TimeOff/OutstandingTimeOff.cshtml" Line="5" Column="119" />
+      <File FileName="HR_Management/Views/TimeOff/TeamMemberTimeOff.cshtml" Line="2" Column="37" />
+      <File FileName="HR_Management/Views/TimeOff/TimeOffIndex.cshtml" Line="5" Column="65" />
+      <File FileName="HR_Management/Views/TimeOff/TimeOffIndexManager.cshtml" Line="5" Column="101" />
+      <File FileName="HR_Management/Views/TimeOff/ViewTimeOff.cshtml" Line="5" Column="70" />
+      <File FileName="HR_Management/Views/Reviews/AddReview.cshtml" Line="5" Column="18" />
+      <File FileName="HR_Management/Views/Reviews/EditReview.cshtml" Line="5" Column="72" />
+      <File FileName="HR_Management/Views/Reviews/ReviewsIndex.cshtml" Line="5" Column="71" />
+      <File FileName="HR_Management/Views/Reviews/ReviewsIndexManager.cshtml" Line="5" Column="96" />
+      <File FileName="HR_Management/Views/Reviews/TeamMemberReviews.cshtml" Line="5" Column="96" />
+      <File FileName="HR_Management/Views/Reviews/TeamReviews.cshtml" Line="5" Column="105" />
+      <File FileName="HR_Management/Views/Reviews/ViewReview.cshtml" Line="5" Column="12" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.HR__Management PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

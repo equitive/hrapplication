@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Positions";
+}
+
+    <!-- Employee Positions Page --Page where any employee can view their positions -->
+
+
+<div class="body-style">
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+      <div class="w3-container w3-row">
+        <div class="w3-col s3">
+          <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
+        </div>
+        <div class="w3-col s9 w3-bar">
+          <span>Welcome, <strong>Ike</strong></span><br>
+          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-envelope"></i></a>
+          <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
+          <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
+        </div>
+      </div>
+      <hr>
+      <div class="w3-container">
+        <h5>Dashboard</h5>
+      </div>
+      <div class="w3-bar-block">
+        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+        <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card-o fa-fw"></i>  Account Overview</a>
+        <a asp-area="" asp-controller="Teams" asp-action="ViewTeam" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  View Team</a>
+        <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
+        <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
+        <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
+        <a asp-area="" asp-controller="Positions" asp-action="PositionsIndex" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart fa-fw"></i>  Position Info</a>
+        <a asp-area="" asp-controller="Rankings" asp-action="DepartmentRankingIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw"></i>  Ranking</a>
+        <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
+      </div>
+    </nav>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+
+    <div class="w3-main" style="margin-left:340px;margin-top:43px;">
+        <div class="main-card-container w3-card-2 w3-white w3-margin-bottom">
+
+            <div class="main-overview">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="container col-md-12 my-2">
+                                <div class="card py-2">
+                                    <div class="row py-9">
+                                        <div class="col-md-9 px-2">
+                                            <br>
+                                            <div class="card-block px-3">
+                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-line-chart fa-fw"></i> View Positions</h3></li>
+                                                <br>
+                                                <div class="card-text w3-text-grey">
+                                                    <h4> All Positions </h4>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row py-9">
+                            <div class="card py-2">
+                                <div class="card-block">
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>Positions (2)</h5></li>
+                                </div>
+                                <table class="table table-striped" style="width: 1200px;">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Position Title</th>
+                                        <th>Manager</th>
+                                        <th>Salary</th>
+                                    </tr>  
+                                    <tr>
+                                        <td>January 10, 2016</td>
+                                        <td>Senior Software Developer</td>
+                                        <td>Gon Retire</td>
+                                        <td>$120,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>April 1, 2007</td>
+                                        <td>Junior Developer</td>
+                                        <td>Felix M. Hedegaard</td>
+                                        <td>$60,000</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
