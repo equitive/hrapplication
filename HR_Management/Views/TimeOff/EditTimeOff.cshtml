@@ -1,4 +1,6 @@
-﻿@{
+﻿@model HR_Management.Models.HRModels.TimeOff
+
+@{
     ViewData["Title"] = "Edit Time Off Request";
 }
 
@@ -56,14 +58,17 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Edit Time Off Request</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="EditTimeOff">
                                                         <h4 class="w3-text-grey"> Complete all fields of this time off request.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
+                                                        <input type="hidden" asp-for="ID" />
+                                                        <input type="hidden" asp-for="empId" />
+                                                        <input type="hidden" asp-for="approve" />
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <select class="form-control">
+                                                                <select asp-for="type" class="form-control">
                                                                   <option value="sick">Sick Leave</option>
                                                                   <option value="vacation">Vacations</option>
                                                                 </select>
@@ -73,27 +78,27 @@
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Brief Description" value="Taking care of my dying grandmother."/>
-                                                                <span class="text-danger"></span>
+                                                                <input asp-for="description" class="form-control" />
+                                                                <span asp-validation-for="description" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="date"  placeholder="Dates From" value="" />
-                                                                <span class="text-danger"></span>
+                                                                <input asp-for="startDate" type="date" class="form-control" />
+                                                                <span asp-validation-for="startDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="date" placeholder="Dates To" value=""/>
-                                                                <span class="text-danger"></span>
+                                                                <input asp-for="endDate" type="date" class="form-control" />
+                                                                <span asp-validation-for="endDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-md-offset-2 col-md-10">
-                                                                <button type="submit" class="btn btn-default">Submit Changes</button>
+                                                                <button type="submit" value="save" class="btn btn-default">Submit Changes</button>
                                                             </div>
                                                         </div>
                                                     </form>

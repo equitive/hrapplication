@@ -57,7 +57,7 @@
                                                 <br>
 												<div class="card-text w3-text-grey">
 												    <h4> Engineering Department </h4>
-                                                    <b>Manager:</b> Ove Tomanage
+                                                    <b>Manager:</b> @ViewBag.Manager.fname @ViewBag.Manager.lname
 												</div>
 												<br>
                                             </div>
@@ -79,49 +79,17 @@
                                         <th>Position</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
-                                    </tr>									
+                                    </tr>						
+                                   @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                   {
                                     <tr>
                                         <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Engineering Manager</td>
-                                        <td>otm@hackerland.com</td>
-                                        <td>345-678-9012 </td>
+                                        <td>@employee.fname @employee.lname</td>
+                                        <td>@employee.jobTitle</td>
+                                        <td>@employee.email</td>
+                                        <td>@employee.phoneNumber </td>
                                     </tr>
-                                    <tr>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Ike Tocode</td>
-                                        <td>Senior Software Developer</td>
-                                        <td>itocode@hackerland.com</td>
-                                        <td>123-456-7890</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Thomas R. Etheridge</td>
-                                        <td>Software Developer</td>
-                                        <td>etheridge@hackerland.com</td>
-                                        <td>234-567-8901</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Fang Wei</td>
-                                        <td>Intern</td>
-                                        <td>fwei@hackerland.com</td>
-                                        <td>456-789-0123</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Onyeorulu Ikedinachukwu</td>
-                                        <td>Junior Electrical Engineer</td>
-                                        <td>oikedinachukwu@hackerland.com</td>
-                                        <td>567-890-1234</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Yahyah Shamil Najjar</td>
-                                        <td>Mechanical Engineer</td>
-                                        <td>ynajjar@hackerland.com</td>
-                                        <td>678-901-2345</td>
-                                    </tr>
+                                   }
                                 </table>
                             </div>
                         </div>
