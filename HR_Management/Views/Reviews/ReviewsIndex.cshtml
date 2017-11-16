@@ -74,31 +74,16 @@
                                         <th>Date</th>
                                         <th>Review From</th>
                                         <th>Numeric Equivalent</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2017 Review</a></td>
-                                        <td>May 15, 2017</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>75%</td>
                                     </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2016 Review</a></td>
-                                        <td>May 29, 2016</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>50%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2015 Review</a></td>
-                                        <td>May 1, 2015</td>
-                                        <td>Gon Retire</td>
-                                        <td>100%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2014 Review</a></td>
-                                        <td>May 17, 2014</td>
-                                        <td>Gon Retire</td>
-                                        <td>100%</td>
-                                    </tr>
+                                    @foreach (var review in (IEnumerable<dynamic>)ViewBag.Reviews.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview" asp-route-id="@review.ID">@review.title</a></td>
+                                            <td>@review.date</td>
+                                            <td>@review.mgrfname @review.mgrlname</td>
+                                            <td>@review.score%</td>
+                                        </tr>
+                                    }
                                 </table>
                             </div>
                         </div>

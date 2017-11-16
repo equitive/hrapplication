@@ -14,4 +14,15 @@ namespace HR_Management.Models.HRModels
         public string jobTitle { get; set; }
         public string department { get; set; }
     }
+    public class RevMgrJoined
+    {
+        public string date { get; set; }
+        public string title { get; set; }
+        public int manager { get; set; }
+        public double score { get; set; }
+        public string description { get; set; }
+        public string mgrfname { get; set; }
+        public string mgrlname { get; set; }
+        public int ID { get; set; }
+    }
 }
