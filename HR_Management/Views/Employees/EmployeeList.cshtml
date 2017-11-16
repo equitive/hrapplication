@@ -82,50 +82,29 @@
                                         <th>Photo</th>
                                         <th>Employee Name</th>
                                         <th>Position</th>
-                                        <th>Manager</th>
+                                        <th>Manager ID</th>
                                         <th>Status</th>
                                         <th>Terminate</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Ike Tocode </a> </td>
-                                        <td>Senior Software Developer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Thomas R. Etheridge</a></td>
-                                        <td>Software Developer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Fang Wei</a></td>
-                                        <td>Intern</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Onyeorulu Ikedinachukwu</a></td>
-                                        <td>Junior Electrical Engineer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Yahyah Shamil Najjar</a></td>
-                                        <td>Mechanical Engineer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
+                                    </tr> 
+                                     @foreach (var model in ViewBag.AllEmployees.Items)
+                                     {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">@Html.Encode(model.fname+ " ") @Html.Encode(model.lname)</a></td>
+                                            <td>@Html.Encode(model.position)</td>
+                                            <td>@Html.Encode(model.managerID)</td>
+                                            <td>@Html.Encode(model.status)</td>
+                                            @if (Html.Encode(model.status) == "Terminated")
+                                            {
+                                                //Print nothing
+                                                <td></td>
+                                            }
+                                            else
+                                            {
+                                                <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
+                                            }
+                                        </tr>
+                                     }
                                 </table>
                             </div>
                         </div>
