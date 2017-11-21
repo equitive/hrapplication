@@ -14,6 +14,7 @@ namespace HR_Management.Models.HRModels
        public string email { get; set; }
        public int rank { get; set; }
        public int managerID { get; set; }
-       
+       public string department { get; set; }
+       public  int employeeType { get; set; }
     }
 }
