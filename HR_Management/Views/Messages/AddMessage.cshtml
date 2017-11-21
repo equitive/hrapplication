@@ -58,28 +58,29 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Compose Message</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="AddMessage">
                                                         <h4 class="w3-text-grey"> Complete all fields to compose a message.</h4>
+                                                        <b style="color: red; font-weight: bold;">@ViewBag.Error</b>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Name of Recipient"/>
+                                                                <input class="form-control" type="text" name="recipientName" id="recipientName" placeholder="Name of Recipient"/>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Title" value="" />
+                                                                <input class="form-control" type="text" name="title" id="title" placeholder="Title" value="" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <textarea rows="4" cols="500" class="form-control"> </textarea>
+                                                                <textarea rows="4" cols="500" name="description" id="description" class="form-control"> </textarea>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>

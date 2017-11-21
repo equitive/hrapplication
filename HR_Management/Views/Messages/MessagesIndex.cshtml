@@ -57,7 +57,9 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Messages</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> 3 Unread Messages </b>
+                                                    <b> 3 Unread Messages 
+                                                        @ViewBag.MessageCount</b>
+                                                   
                                                     <br>
                                                 </div>
                                                 <br>
@@ -80,7 +82,26 @@
                                         <th>From</th>
                                         <th>Title</th>
                                         <th>Delete</th>
-                                    </tr>                                   
+                                    </tr>
+                                    @foreach (var message in (IEnumerable<dynamic>)ViewBag.Messages.Items)
+                                    {
+                                        <tr>
+                                            @if (message.isRead)
+                                            {
+                                                <td><center><i class="fa fa-dot-circle-o"></i></center></td>
+
+                                            }
+                                            else
+                                            {
+                                                <td><center><i class="fa fa-circle-o"></i></center></td>
+                                            }
+
+                                            <td>@message.date</td>
+                                            <td>@message.fnameFrom @message.lnameFrom</td>
+                                            <td><a asp-area="" asp-controller="Messages" asp-route-id="@message.messageID" asp-action="ViewMessage">@message.title</a></td>
+                                            <th><center><i class="fa fa-trash-o"></i></center></th>
+                                        </tr>
+                                    }
                                     <tr>
                                         <td><center><i class="fa fa-dot-circle-o"></i></center></td> 
                                         <td>October 5, 2017</td>

@@ -25,4 +25,15 @@ namespace HR_Management.Models.HRModels
         public string mgrlname { get; set; }
         public int ID { get; set; }
     }
+    public class MessageFromClass
+    {
+        public int messageID;
+        public string title { get; set; }
+        public string content { get; set; }
+        public int employeeFromID { get; set; }
+        public string date { get; set; }
+        public bool isRead { get; set; }
+        public string fnameFrom { get; set; }
+        public string lnameFrom { get; set; }
+    }
 }
