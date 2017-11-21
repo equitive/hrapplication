@@ -35,11 +35,24 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult DepartmentRankingIndex()
+		public async Task<ActionResult> DepartmentRankingIndex()
 		{
 			ViewData["Message"] = "Page to view all the rankings in a department.";
+            //Shows only the rankings of employees within the logged in employees department
+            ViewData["Message"] = "Page to view all the rankings in the company.";
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
+            var DeptRankedEmployees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department=c.department, employeeType=c.employeeType}).OrderBy(c => c.rank).Where(v => v.department == emp.department);
+            ViewData["DeptRankedEmployees"] = new SelectList(DeptRankedEmployees);
+            ViewData["Employee"] = emp;
+            ViewData["Manager"] = mgr;
+            return View();
 
-			return View();
 		}
 
 		public async Task<ActionResult> CompanyRankingIndex()
@@ -50,8 +63,11 @@ namespace HR_Management.Controllers
             {
                 return View("Error");
             }
-            var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email }).OrderBy(c=>c.rank);
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
+            var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department = c.department, employeeType = c.employeeType }).OrderBy(c=>c.rank);
             ViewData["FullRankedEmployees"] = new SelectList(RankedEmployees);
+            ViewData["Manager"] = mgr;
             return View();
 		}
 

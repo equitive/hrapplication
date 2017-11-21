@@ -61,8 +61,8 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-bar-chart fa-fw"></i> View Ranking</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <h4> Engineering Department </h4>
-                                                    <b>Manager:</b> Ove Tomanage
+                                                    <h4> @ViewBag.Employee.department Department </h4>
+                                                    <b>Manager:</b> @ViewBag.Manager.fname @ViewBag.Manager.lname
                                                 </div>
                                                 <br>
                                             </div>
@@ -84,49 +84,18 @@
                                         <th>Employee Name</th>
                                         <th>Position</th>
                                         <th>Email</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td>1</td>
-										<td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Engineering Manager</td>
-                                        <td>otm@hackerland.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Thomas R. Etheridge</td>
-                                        <td>Software Developer</td>
-                                        <td>etheridge@hackerland.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Fang Wei</td>
-                                        <td>Intern</td>
-                                        <td>fwei@hackerland.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Onyeorulu Ikedinachukwu</td>
-                                        <td>Junior Electrical Engineer</td>
-                                        <td>oikedinachukwu@hackerland.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-										<td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Yahyah Shamil Najjar</td>
-                                        <td>Mechanical Engineer</td>
-                                        <td>ynajjar@hackerland.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>Ike Tocode</td>
-                                        <td>Senior Software Developer</td>
-                                        <td>itocode@hackerland.com</td>
-                                    </tr>
+                                    </tr>  
+                                    @foreach (var model in ViewBag.DeptRankedEmployees.Items)
+                                    {
+                                        <tr>
+                                            <td>@Html.Encode(model.rank)</td>
+                                            <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
+                                            <td>@Html.Encode(model.fname + " " + model.lname)</td>
+                                            <td>@Html.Encode(model.position)</td>
+                                            <td>@Html.Encode(model.email)</td>
+                                        </tr>
+                                    }
+                                    
                                 </table>
                             </div>
                         </div>
