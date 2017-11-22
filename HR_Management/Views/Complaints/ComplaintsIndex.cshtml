@@ -72,37 +72,17 @@
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Edit/Delete</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Low Salary</a></td>
-                                        <td>September 17, 2017</td>
-                                        <td>Pending</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
                                     </tr>
-									<tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Complaint about 2017 Review</a></td>
-                                        <td>May 17, 2017</td>
-                                        <td>Investigation in Progress</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Lazy Manager</a></td>
-                                        <td>May 29, 2016</td>
-                                        <td>Resolved</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Complaint about 2015 Review</a></td>
-                                        <td>May 1, 2015</td>
-                                        <td>Resolved</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">2014 Denied Vacation</a></td>
-                                        <td>February 15, 2014</td>
-                                        <td>Resolved</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
+                                      @foreach (var employee in (IEnumerable<dynamic>)ViewBag.CurrentEmployeeComplaints.Items)
+                                      {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">@employee.title</a></td>
+                                            <td>@employee.date</td>
+                                            <td>@employee.status</td>
+                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
+
+                                        </tr>
+                                      }							
                                 </table>
                             </div>
                         </div>

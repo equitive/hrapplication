@@ -81,18 +81,17 @@
                                         <th>Status</th>
                                         <th>Change Status</th>
                                     </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Low Salary</a></td>
-                                        <td>September 17, 2017</td>
-                                        <td>Pending</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaintStatus"><i class="fa fa-pencil-square-o"></i></a></i></center></th>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Complaint about 2017 Review</a></td>
-                                        <td>May 17, 2017</td>
-                                        <td>Investigation in Progress</td>
-                                        <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaintStatus"><i class="fa fa-pencil-square-o"></i></a></i></center></th>
-                                    </tr>
+                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.AllComplaints.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">@employee.title</a></td>
+                                            <td>@employee.date</td>
+                                            <td>@employee.status</td>
+                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
+
+                                        </tr>
+                                    }
+                                    
                                 </table>
                             </div>
                         </div>
