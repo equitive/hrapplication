@@ -73,12 +73,33 @@
                                 </div>
                                 <table class="table table-striped" style="width: 1200px;">
                                     <tr>
-                                        <th>Date</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Position Title</th>
                                         <th>Manager</th>
                                         <th>Salary</th>
                                     </tr>  
-                                    <tr>
+                                    @foreach (var position in (IEnumerable<dynamic>)ViewBag.Positions.Items)
+                                    {
+                                        <tr>
+                                            <td>@position.startDate.ToString("D")</td>
+                                            @if (position.endDate != null)
+                                            {
+                                                <td>@position.endDate.ToString("D")</td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    Present
+                                                </td>
+                                            }
+                                            <td>@position.jobTitle</td>
+                                            <td>@position.mgrfname @position.mgrlname</td>
+                                            <td>$@position.salary</td>
+                                        </tr>
+                                    }
+
+                                    @*<tr>
                                         <td>January 10, 2016</td>
                                         <td>Senior Software Developer</td>
                                         <td>Gon Retire</td>
@@ -89,7 +110,7 @@
                                         <td>Junior Developer</td>
                                         <td>Felix M. Hedegaard</td>
                                         <td>$60,000</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

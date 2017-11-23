@@ -17,5 +17,7 @@ namespace HR_Management.Models.HRModels
         public string jobTitle { get; set; }
         public string jobDescription { get; set; }
         public double salary { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime? endDate { get; set; }
     }
 }

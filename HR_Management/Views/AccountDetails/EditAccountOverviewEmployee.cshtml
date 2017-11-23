@@ -38,73 +38,72 @@
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-
-    <div class="w3-main" style="margin-left:340px;margin-top:43px;">
-        <div class="main-card-container w3-card-2 w3-white w3-margin-bottom">
-
-            <div class="main-overview">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="row">
-                            <div class="container col-md-12 my-2">
-                                <div class="card py-2">
-                                    <div class="row py-9">
-                                        <div class="col-md-9 px-2">
-                                            <br>
-                                            <div class="card-block px-3">
-                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 69rem;"><h3> <i class="fa fa-address-card-o fa-fw"></i> Edit Account Information</h3></li>
-                                                <div class="w3-col s5">
-                                                    <center><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:300px"></center>
-                                                </div>
+    <form asp-action="EditAccountOverviewEmployee">
+        <div class="w3-main" style="margin-left:340px;margin-top:43px;">
+            <div class="main-card-container w3-card-2 w3-white w3-margin-bottom">
+                <div class="main-overview">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="container col-md-12 my-2">
+                                    <div class="card py-2">
+                                        <div class="row py-9">
+                                            <div class="col-md-9 px-2">
                                                 <br>
+                                                <div class="card-block px-3">
+                                                    <li class="list-group-item my-4 w3-text-teal card-title" style="width: 69rem;"><h3> <i class="fa fa-address-card-o fa-fw"></i> Edit Account Information</h3></li>
+                                                    <div class="w3-col s5">
+                                                        <center><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:300px"></center>
+                                                    </div>
+                                                    <br>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="row py-9">
-                            <div class="card py-2">
-                                <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 70rem;"><h5>Personal Data</h5></li>
-                                </div>
-                                <table class="table table-striped" style="width: 700px;">
-                                    <tr>
-                                        <th>First Name</th>
-                                        <td><input class="form-control" type="text" placeholder="First Name" value="Ike"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Last Name</th>
-                                        <td><input class="form-control" type="text" placeholder="Last Name" value="Tocode"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address</th>
-                                        <td><input class="form-control" type="text" placeholder="Address" value="123 Java Lane Hacker, Hackland 73373"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td><input class="form-control" type="text" placeholder="Email" value="itocode@hackerland.com"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone Number</th>
-                                        <td><input class="form-control" type="text" placeholder="Phone Number" value="123-456-7890"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        
 
+                            <div class="row py-9">
+                                <div class="card py-2">
+                                    <div class="card-block">
+                                        <li class="list-group-item active card-title" style="width: 70rem;"><h5>Personal Data</h5></li>
+                                    </div>
+                                    <table class="table table-striped" style="width: 700px;">
+                                        <tr>
+                                            <th>First Name</th>
+                                            <td><input class="form-control" type="text" name="fname" placeholder="First Name" value="@ViewBag.Employee.fname"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Last Name</th>
+                                            <td><input class="form-control" type="text" name="lname" placeholder="Last Name" value="@ViewBag.Employee.lname"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td><input class="form-control" type="text" name="address" placeholder="Address" value="@ViewBag.Employee.address"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td><input class="form-control" type="text" name="email" placeholder="Email" value="@ViewBag.Employee.email"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <td><input class="form-control" type="text" name="phoneNumber" placeholder="Phone Number" value="@ViewBag.Employee.phoneNumber"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="col-md-6">
-                            <div class="card-block" style="margin-top: 300px;">
-                               <a asp-area="" asp-controller="" asp-action="" class="w3-bar-item w3-button w3-padding"><li class="list-group-item card-title w3-text-grey" style="width: 30rem;"><center><h5><i class="fa fa-floppy-o "></i> Save Changes</h5></center></li></a>
+                        <div class="col-md-3">
+                            <div class="col-md-6">
+                                <div class="card-block" style="margin-top: 300px;">
+                                    <button type="submit" value="save" class="btn btn-default"><center><h5><i class="fa fa-floppy-o "></i> Save Changes</h5></center></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
-    </div>
+        </div>
+    </form>
 </div>

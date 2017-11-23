@@ -46,14 +46,42 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult EditAccountOverviewEmployee()
+        [HttpGet]
+		public async Task<IActionResult> EditAccountOverviewEmployee()
 		{
 			ViewData["Message"] = "Edit the account information.";
-
-			return View();
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Employee"] = emp;
+            return View();
 		}
 
-		public IActionResult ManagerAccountOverview()
+        [HttpPost]
+        public async Task<IActionResult> EditAccountOverviewEmployee(string fname, string lname, string address, string email, string phoneNumber)
+        {
+            ViewData["Message"] = "Edit the account information.";
+            ViewData["Message"] = "Employee application account overview page upon login.";
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            emp.fname = fname;
+            emp.lname = lname;
+            emp.address = address;
+            emp.email = email;
+            emp.phoneNumber = phoneNumber;
+            _context.Entry(emp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AccountDetailsController.AccountOverview), "AccountDetails");
+        }
+
+        public IActionResult ManagerAccountOverview()
 		{
 			ViewData["Message"] = "Manager application account overview page upon login.";
 

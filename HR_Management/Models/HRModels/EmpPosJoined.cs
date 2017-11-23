@@ -25,6 +25,16 @@ namespace HR_Management.Models.HRModels
         public string mgrlname { get; set; }
         public int ID { get; set; }
     }
+    public class PosMgrJoined
+    {
+        public bool status { get; set; } //Approved / Rejected / Promoted
+        public string jobTitle { get; set; }
+        public double salary { get; set; }
+        public string mgrfname { get; set; }
+        public string mgrlname { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime? endDate { get; set; }
+    }
     public class MessageFromClass
     {
         public int messageID;
