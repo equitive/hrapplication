@@ -28,6 +28,13 @@
         <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-address-card-o fa-fw"></i>  Account Overview</a>
         <a asp-area="" asp-controller="Teams" asp-action="ViewTeam" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  View Team</a>
         <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
+          @if (ViewBag.ShowAdd)
+          {
+          <div id="demoAcc" class="w3-show w3-white">
+              <a href="#" class="w3-bar-item w3-button w3-grey">Personal Time Off</a>
+              <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">Time Off Requests</a>
+          </div>
+          }
         <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
         <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
         <a asp-area="" asp-controller="Positions" asp-action="PositionsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Position Info</a>
@@ -62,8 +69,10 @@
                                                     <br>
 													<br>
 													<a asp-area="" asp-controller="TimeOff" asp-action="AddTimeOff" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Request Time Off </a>
-													
-													
+                                                    @if (ViewBag.ShowAdd)
+                                                    {
+                                                        <a class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;" asp-area="" asp-controller="TimeOff" asp-action="AddTimeOff"> Add Time-Off </a>
+                                                    }
                                                 </div>
                                                 <br>
                                             </div>
@@ -91,7 +100,7 @@
                                     {
                                         <tr>
                                             <td>@timeoff.type</td>
-                                            <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">@timeoff.description</a></td>
+                                            <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff" asp-route-id="@timeoff.ID">@timeoff.description</a></td>
                                             <td>@timeoff.startDate</td>
                                             <td>@timeoff.endDate</td>
                                             <td>@timeoff.approve</td>
@@ -104,7 +113,7 @@
                                             </td>
                                         </tr>
                                     }
-                                    <tr>
+                                    @*<tr>
                                         <td>Vacation</td>
                                         <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Going to Paris.</a></td>
 										<td>Sepetember 30, 2018</td>
@@ -159,7 +168,7 @@
                                         <td>July 21, 2014</td>
                                         <td>Denied</td>
                                         <td><center><a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

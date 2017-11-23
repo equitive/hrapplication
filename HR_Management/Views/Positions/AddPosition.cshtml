@@ -58,24 +58,45 @@
                                         <div class="col-md-9 px-2">
                                             <br>
                                             <div class="card-block px-3">
-                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Request Time Off</h3></li>
+                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Change the employee's position/h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
-                                                        <h4 class="w3-text-grey"> Complete all fields to request time off.</h4>
+                                                    <form class="form-horizontal" asp-action="AddPosition">
+                                                        <h4 class="w3-text-grey"> Complete all fields to change an employee's position.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Position Title" />
+                                                                <input class="form-control" type="text" name="empId" placeholder="Employee ID" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text" placeholder="Salary" />
+                                                                <input class="form-control" type="text" name="title" placeholder="Position Title" />
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <div class="col-md-10">
+                                                                <textarea class="form-control" type="text" name="description" placeholder="Description"></textarea>
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" name="salary" placeholder="Salary (Annual)" />
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" name="managerID" placeholder="Manager ID" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>

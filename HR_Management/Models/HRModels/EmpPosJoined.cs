@@ -15,9 +15,13 @@ namespace HR_Management.Models.HRModels
         public string phoneNumber { get; set; }
         public string jobTitle { get; set; }
         public string department { get; set; }
+        public string posstartdate { get; set; }
+        public double salary { get; set; }
+        public bool status { get; set; }
     }
     public class RevMgrJoined
     {
+        public string empdepartment;
         public string date { get; set; }
         public string title { get; set; }
         public int manager { get; set; }
@@ -39,7 +43,7 @@ namespace HR_Management.Models.HRModels
     }
     public class MessageFromClass
     {
-        public int messageID;
+        public int messageID { get; set; }
         public string title { get; set; }
         public string content { get; set; }
         public int employeeFromID { get; set; }
@@ -48,4 +52,15 @@ namespace HR_Management.Models.HRModels
         public string fnameFrom { get; set; }
         public string lnameFrom { get; set; }
     }
+    public class TimeoffEmployeeJoined
+    {
+        public int ID { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
+        public string type { get; set; }
+        public string description { get; set; }
+        public string mgrfname { get; set; }
+        public string mgrlname { get; set; }
+        public bool approved { get; set; }
+    }        
 }

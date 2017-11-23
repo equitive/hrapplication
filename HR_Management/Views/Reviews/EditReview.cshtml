@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HR_Management.Models.HRModels.Reviews
+@{
     ViewData["Title"] = "Edit Review";
 }
 
@@ -61,28 +62,33 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Edit Review</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="EditReview">
                                                         <h4 class="w3-text-grey"> Complete all fields to leave a review.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
+                                                        <input type="hidden" class="form-control"  asp-for="ID"/>
+                                                        <input type="hidden" class="form-control"  asp-for="empId" />
+                                                        <input type="hidden" class="form-control"  asp-for="date" />
+                                                        <input type="hidden" class="form-control"  asp-for="manager" />
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Title</label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Name of Recipient" value="Ike Tocode"/>
+                                                                <input rows="4" cols="500" class="form-control" asp-for="title" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Description</label>
                                                             <div class="col-md-10">
-                                                                <textarea rows="4" cols="500" class="form-control" placeholder="Enter Review Here"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </textarea>
+                                                                <input rows="4" cols="500" class="form-control" asp-for="description" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
+
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Score</label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Numerical Value" value="75" />
+                                                                <input class="form-control" type="text" asp-for="score" placeholder="Numerical Value" value="75" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>

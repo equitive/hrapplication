@@ -81,10 +81,20 @@
                                         <th>Title</th>
                                         <th>Date</th>
                                         <th>Review From</th>
-                                        <th>Review To</th>
                                         <th>Numeric Equivalent</th>
-                                    </tr>                                   
-                                    <tr>
+                                    </tr>                
+                                    
+                                    @foreach (var review in ViewBag.AllReviews.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview" asp-route-id="@review.ID">@review.title</a></td>
+                                            <td>@review.date</td>
+                                            <td>@review.mgrfname @review.mgrlname</td>
+                                            <td>@review.score%</td>
+                                        </tr>
+                                    }
+
+                                    @*<tr>
                                         <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2017 Review</a></td>
                                         <td>May 15, 2017</td>
                                         <td>Ove Tomanage</td>
@@ -111,7 +121,7 @@
                                         <td>Gon Retire</td>
                                         <td>Ike Tocode</td>
                                         <td>100%</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

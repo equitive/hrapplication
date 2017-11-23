@@ -84,10 +84,10 @@
                                     @foreach (var employee in (IEnumerable<dynamic>)ViewBag.AllComplaints.Items)
                                     {
                                         <tr>
-                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">@employee.title</a></td>
+                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint" asp-route-id="@employee.ID">@employee.title</a></td>
                                             <td>@employee.date</td>
                                             <td>@employee.status</td>
-                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
+                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint" asp-route-id="@employee.ID"><i class="fa fa-pencil-square-o"></i></a> </center></th>
 
                                         </tr>
                                     }

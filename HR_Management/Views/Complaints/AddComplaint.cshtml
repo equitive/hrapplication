@@ -56,14 +56,21 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Add Complaint</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="AddComplaint">
                                                         <h4 class="w3-text-grey"> Complete all fields to submit a complaint.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
                                                             <label class=" control-label"></label>
                                                             <div>
-                                                                <textarea rows="4" cols="500" style="width:600px" class="form-control" placeholder="Enter Complaint Here"> </textarea>
+                                                                <input rows="4" cols="500" style="width:600px" name="title" class="form-control" placeholder="Title">
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class=" control-label"></label>
+                                                            <div>
+                                                                <textarea rows="4" cols="500" style="width:600px" name="description" class="form-control" placeholder="Enter Complaint Here"> </textarea>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>

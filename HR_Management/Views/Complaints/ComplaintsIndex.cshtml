@@ -29,6 +29,13 @@
         <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
         <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
         <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
+        @if (ViewBag.ShowAdd)
+        {
+            <div id="demoAcc" class="w3-show w3-white">
+                <a href="#" class="w3-bar-item w3-button w3-grey">Personal Complaints</a>
+                <a asp-area="" asp-controller="Complaints" asp-action="OutstandingComplaints" class="w3-bar-item w3-button">(HR) Outstanding Complaints</a>
+            </div>
+        }
         <a asp-area="" asp-controller="Positions" asp-action="PositionsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Position Info</a>
         <a asp-area="" asp-controller="Rankings" asp-action="DepartmentRankingIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw"></i>  Ranking</a>
         <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a><br><br>
@@ -63,24 +70,24 @@
                         
                         <div class="row py-9">
                             <div class="card py-2">
+                                <a class="w3-bar-item w3-button w3-text-white" style="background-color: #009688; margin-bottom: 20px;" asp-area="" asp-controller="Complaints" asp-action="AddComplaint"> Add Complaint </a>
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Complaints (5)</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Complaints </h5></li>
                                 </div>
                                   <table class="table table-striped" style="width: 1200px;">
                                     <tr>
                                         <th>Title</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                        <th>Edit/Delete</th>
+                                        <th>Edit</th>
                                     </tr>
                                       @foreach (var employee in (IEnumerable<dynamic>)ViewBag.CurrentEmployeeComplaints.Items)
                                       {
                                         <tr>
-                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">@employee.title</a></td>
+                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint" asp-route-id="@employee.ID">@employee.title</a></td>
                                             <td>@employee.date</td>
                                             <td>@employee.status</td>
-                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-
+                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint" asp-route-id="@employee.ID"><i class="fa fa-pencil-square-o"></i></a>  </center></th>
                                         </tr>
                                       }							
                                 </table>

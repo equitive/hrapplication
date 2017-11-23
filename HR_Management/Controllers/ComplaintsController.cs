@@ -8,6 +8,7 @@ using HR_Management.Models;
 using HR_Management.Models.HRModels;
 using HR_Management.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace HR_Management.Controllers
 {
@@ -22,21 +23,37 @@ namespace HR_Management.Controllers
             _context = context;
             _signInManager = signInManager;
         }
-        public IActionResult ViewComplaint()
-		{
-			ViewData["Message"] = "Page to view a complaints.";
 
-			return View();
-		}
+        public IActionResult ViewComplaint(int ID)
+        {
+            ViewData["Message"] = "Page to view a specific time off.";
+            Complaints complaint = _context.Complaints.Where(x => x.ID == ID).First();
+            Employee cmpfrom = _context.Employee.Where(x => x.empId == complaint.empId).First();
+            ViewData["Complaint"] = complaint;
+            ViewData["FromName"] = cmpfrom.fname + " " + cmpfrom.lname;
+            return View();
+        }
 
-		public IActionResult EditComplaint()
-		{
-			ViewData["Message"] = "Page to edit a complaints.";
+        [HttpGet]
+        public IActionResult EditComplaint(int ID)
+        {
+            ViewData["Message"] = "Page to edit a time off.";
+            Complaints compl = _context.Complaints.Where(x => x.ID == ID).First();
+            return View(compl);
+        }
 
-			return View();
-		}
+        [HttpPost]
+        public async Task<IActionResult> EditComplaint(Complaints compledited)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(compledited).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(ComplaintsController.ComplaintsIndex), "Complaints");
+        }
 
-		public async Task<IActionResult> ComplaintsIndex()
+        public async Task<IActionResult> ComplaintsIndex()
 		{
             //Lists regular employee complaints
 			ViewData["Message"] = "Page to view all the complaints.";
@@ -48,6 +65,7 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var CurrentComplaintList = _context.Complaints.Where(x => x.empId == emp.empId);
             ViewData["CurrentEmployeeComplaints"] = new SelectList(CurrentComplaintList);
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             return View();
 		}
 
@@ -91,14 +109,36 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult AddComplaint()
+        [HttpGet]
+        public IActionResult AddComplaint()
 		{
 			ViewData["Message"] = "Page to add a complaints.";
 
 			return View();
 		}
 
-		public IActionResult Error()
+
+        [HttpPost]
+        public async Task<IActionResult> AddComplaint(string title, string description)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to add a time off.";
+            Complaints complaint = new Complaints();
+            complaint.date = DateTime.Now.ToString();
+            complaint.title = title;
+            complaint.status = "Pending";
+            complaint.description = description;
+            complaint.empId = emp.empId;
+            _context.Complaints.Add(complaint);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ComplaintsController.ComplaintsIndex), "Complaints");
+        }
+        public IActionResult Error()
 		{
 			return View();
 		}

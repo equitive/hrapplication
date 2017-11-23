@@ -38,14 +38,26 @@ namespace HR_Management.Controllers
 
         }
 
-        public IActionResult EditReview()
-		{
-			ViewData["Message"] = "Page to edit a review.";
+        [HttpGet]
+        public IActionResult EditReview(int ID)
+        {
+            ViewData["Message"] = "Page to edit a review.";
+            Reviews review = _context.Reviews.Where(x => x.ID == ID).First();
+            return View(review);
+        }
 
-			return View();
-		}
+        [HttpPost]
+        public async Task<IActionResult> EditReview(Reviews reviewedited)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(reviewedited).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(ReviewsController.ReviewsIndex), "Reviews");
+        }
 
-		public async Task<IActionResult> ReviewsIndex()
+        public async Task<IActionResult> ReviewsIndex()
 		{
 			ViewData["Message"] = "Page to view all the reviews.";
             var user = await GetCurrentUserAsync();
@@ -57,6 +69,7 @@ namespace HR_Management.Controllers
             var reviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
             new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date) ;
             ViewData["Reviews"] = new SelectList(reviews);
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             return View();
 		}
 
@@ -67,11 +80,20 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult TeamReviews()
+		public async Task<IActionResult> TeamReviews()
 		{
 			ViewData["Message"] = "Page to view all team reviews.";
-
-			return View();
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            var reviews = _context.Reviews.Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
+            new RevMgrJoined { ID = c.ID, empdepartment = d.department, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date).Where(b => b.empdepartment == emp.department);
+            ViewData["Reviews"] = new SelectList(reviews);
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            return View();
 		}
 
 		public IActionResult TeamMemberReviews()
@@ -81,14 +103,38 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult AddReview()
-		{
-			ViewData["Message"] = "Page to add a review.";
+        [HttpGet]
+        public IActionResult AddReview()
+        {
+            ViewData["Message"] = "Page to add a review.";
 
-			return View();
-		}
+            return View();
+        }
 
-		public IActionResult Error()
+        [HttpPost]
+        public async Task<IActionResult> AddReview(string fname, string lname, string title, string description, int score)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee empreviewed = _context.Employee.Where(x => x.fname == fname && x.lname == lname).First();
+            ViewData["Message"] = "Page to add a time off.";
+            Reviews review = new Reviews();
+            review.date = DateTime.Now.ToString();
+            review.title = title;
+            review.score = score;
+            review.manager = emp.empId;
+            review.description = description;
+            review.empId = empreviewed.empId;
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ReviewsController.ReviewsIndex), "Reviews");
+        }
+
+        public IActionResult Error()
 		{
 			return View();
 		}

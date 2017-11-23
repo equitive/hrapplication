@@ -82,10 +82,25 @@
                                         <th>Vacation Description</th>
                                         <th>Vacation Start</th>
                                         <th>Vacation End</th>
-										<th>Feasible?</th>
                                         <th>Approve/Deny</th>
-                                    </tr>                                   
-                                    <tr>
+                                    </tr>      
+                                    @foreach (var timeoff in ViewBag.AllTimeoffs.Items)
+                                    {
+                                        <tr>
+                                            <td>@timeoff.mgrfname @timeoff.mgrlname</td>
+                                            <td>@timeoff.type</td>
+                                            <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff" asp-route-id="@timeoff.ID">@timeoff.description</a></td>
+                                            <td>@timeoff.startDate</td>
+                                            <td>@timeoff.endDate</td>
+                                            <td>
+                                                <center>
+                                                    <a asp-area="" asp-controller="TimeOff" asp-action="ApproveTimeOff" asp-route-approve="1" asp-route-id="@timeoff.ID"><i class="fa fa-check"></i></a>
+                                                    <a asp-area="" asp-controller="TimeOff" asp-action="ApproveTimeOff" asp-route-approve="0" asp-route-id="@timeoff.ID"><i class="fa fa-times"></i></a>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @*<tr>
                                         <td>Ike Tocode</td>
                                         <td>Vacation</td>
                                         <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Going to Paris.</a></td>
@@ -147,7 +162,7 @@
                                         <td>July 21, 2014</td>
                                         <td><center>Yes</center></td>
                                         <td><center><i class="fa fa-check"></i>  |  <i class="fa fa-times"></i></center></td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

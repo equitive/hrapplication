@@ -25,11 +25,12 @@ namespace HR_Management.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult ViewTimeOff()
+        public IActionResult ViewTimeOff(int ID)
 		{
 			ViewData["Message"] = "Page to view a specific time off.";
-
-			return View();
+            TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
+            ViewData["Timeoff"] = timeoff;
+            return View();
 		}
 
         [HttpGet]
@@ -51,6 +52,21 @@ namespace HR_Management.Controllers
             return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
         }
 
+        public IActionResult ApproveTimeOff(int ID, int approve)
+        {
+            ViewData["Message"] = "Page to edit a time off.";
+            TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
+            if(approve == 1)
+            {
+                timeoff.approve = true;
+            } else
+            {
+                timeoff.approve = false;
+            }
+            _context.Entry(timeoff).State = EntityState.Modified;
+            _context.SaveChangesAsync();
+            return RedirectToAction(nameof(TimeOffController.OutstandingTimeOff), "TimeOff");
+        }
 
         public async Task<IActionResult> TimeOffIndex()
 		{
@@ -63,7 +79,8 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var timeofs = _context.TimeOff.Where(x => x.empId == emp.empId);
             ViewData["TimeOffs"] = new SelectList(timeofs);
-			return View();
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            return View();
 		}
 
 		public IActionResult TimeOffIndexManager()
@@ -73,11 +90,19 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult OutstandingTimeOff()
+		public async Task<IActionResult> OutstandingTimeOff()
 		{
 			ViewData["Message"] = "Page to view all the time off requests.";
-
-			return View();
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
+            new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
+            ViewData["AllTimeoffs"] = new SelectList(AllTimeoffs);
+            return View();
 		}
 
 		public IActionResult ExceedingTimeOff()
@@ -94,6 +119,7 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
+        [HttpGet]
 		public IActionResult AddTimeOff()
 		{
 			ViewData["Message"] = "Page to add a time off.";
@@ -101,7 +127,25 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult Error()
+        [HttpPost]
+        public async Task<IActionResult> AddTimeOff(string type, string description, DateTime startDate, DateTime endDate)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to add a time off.";
+            TimeOff newtoff = new TimeOff();
+            newtoff.approve = false; newtoff.description = description; newtoff.empId = emp.empId; newtoff.endDate = endDate.ToString();
+            newtoff.startDate = startDate.ToString(); newtoff.type = type;
+            _context.TimeOff.Add(newtoff);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
+        }
+
+        public IActionResult Error()
 		{
 			return View();
 		}

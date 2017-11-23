@@ -62,28 +62,42 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Add Review</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="AddReview">
                                                         <h4 class="w3-text-grey"> Complete all fields to leave a review.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Name of Recipient"/>
+                                                                <input class="form-control" type="text" name="fname"  placeholder="First Name of Recipient"/>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <textarea rows="4" cols="500" class="form-control" placeholder="Enter Review Here"> </textarea>
+                                                                <input class="form-control" type="text" name="lname" placeholder="Last Name of Recipient" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Numerical Value" value="" />
+                                                                <input class="form-control" type="text" name="title" placeholder="Title" />
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <div class="col-md-10">
+                                                                <textarea rows="4" cols="500" class="form-control" name="description" placeholder="Review Content"> </textarea>
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-2 control-label"></label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" name="score" placeholder="Numerical Value" value="" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>

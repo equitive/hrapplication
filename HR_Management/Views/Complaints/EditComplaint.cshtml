@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HR_Management.Models.HRModels.Complaints
+@{
     ViewData["Title"] = "Edit Complaints";
 }
 
@@ -56,7 +57,7 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> Edit Complaint: Low Salary</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="EditComplaint">
                                                         <h4 class="w3-text-grey"> Complete all fields to submit changes.</h4>
                                                         <hr />
 														
@@ -64,10 +65,28 @@
                                                         <div class="form-group">
                                                             <label class=" control-label"></label>
                                                             <div>
-                                                                <textarea rows="4" cols="500" style="width:600px" class="form-control" placeholder="Enter Complaint Here"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+                                                                <input rows="4" cols="500" style="width:600px" class="form-control" asp-for="title" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label class=" control-label"></label>
+                                                            <div>
+                                                                <textarea rows="4" cols="500" style="width:600px" class="form-control" asp-for="description"></textarea>
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class=" control-label"></label>
+                                                            <div>
+                                                                <input rows="4" cols="500" style="width:600px" class="form-control" asp-for="status" />
+                                                                <span class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" asp-for="ID" />
+                                                        <input type="hidden" asp-for="reviewID" />
+                                                        <input type="hidden" asp-for="empId" />
+                                                        <input type="hidden" asp-for="date" />
                                                         <div class="form-group">
                                                             <div class="">
                                                                 <button type="submit" class="btn btn-default">Submit Changes</button>

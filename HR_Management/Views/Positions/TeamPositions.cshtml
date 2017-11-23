@@ -63,7 +63,7 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Positions</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> <a asp-area="" asp-controller="Positions" asp-action="AddPosition" class="w3-bar-item w3-button w3-padding w3-blue"> Add Position </a></b>
+                                                    <b> <a asp-area="" asp-controller="Positions" asp-action="AddPosition" class="w3-bar-item w3-button w3-padding w3-blue"> Change an employee's position </a></b>
                                                     <br>
                                                 </div>
                                                 <br>
@@ -84,11 +84,18 @@
                                         <th>Employee</th>
 										<th>Date</th>
                                         <th>Position Title</th>
-                                        <th>Manager</th>
                                         <th>Salary</th>
-                                        <th>Approved?</th>
                                     </tr>  
-                                    <tr>
+                                    @foreach (var position in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                    {
+                                        <tr>
+                                            <td>@position.fname @position.lname</td>
+                                            <td>@position.posstartdate</td>
+                                            <td>@position.jobTitle</td>
+                                            <td>$@position.salary</td>
+                                        </tr>
+                                    }
+                                    @*<tr>
                                         <td>Ike Tocode</td>
                                         <td>January 10, 2016</td>
                                         <td>Senior Software Developer</td>
@@ -103,7 +110,7 @@
                                         <td>Felix M. Hedegaard</td>
                                         <td>$60,000</td>
                                         <td>Yes</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

@@ -30,6 +30,12 @@
         <a asp-area="" asp-controller="Teams" asp-action="ViewTeam" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  View Team</a>
         <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
         <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
+
+          <div id="demoAcc" class="w3-show w3-white">
+              <a href="#" class="w3-bar-item w3-button w3-grey">Personal Reviews</a>
+              <a asp-area="" asp-controller="Reviews" asp-action="TeamReviews" class="w3-bar-item w3-button">Team Reviews</a>
+          </div>
+
         <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
         <a asp-area="" asp-controller="Positions" asp-action="PositionsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-line-chart fa-fw"></i>  Position Info</a>
         <a asp-area="" asp-controller="Rankings" asp-action="DepartmentRankingIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw"></i>  Ranking</a>
@@ -65,6 +71,10 @@
                         
                         <div class="row py-9">
                             <div class="card py-2">
+                                @if (ViewBag.ShowAdd)
+                                {
+                                    <a class="w3-bar-item w3-button w3-text-white" style="background-color: #009688; margin-bottom: 20px;" asp-area="" asp-controller="Reviews" asp-action="AddReview"> Add Review </a>
+                                }
                                 <div class="card-block">
                                       <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Reviews (4)</h5></li>
                                 </div>

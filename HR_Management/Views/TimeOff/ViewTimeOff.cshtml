@@ -57,8 +57,7 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 69rem;"><h3> <i class="fa fa-calendar fa-fw"></i> View Time Off: Vacation</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Edit Time Off </a>
-                                                    <a asp-area="" asp-controller="TimeOff" asp-action="" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Delete Time Off </a>
+                                                    <a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff" asp-route-id="@ViewBag.Timeoff.ID" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Edit Time Off </a>
                                                     <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Return to Time Off </a>
                                                 </div>
                                                 <br>
@@ -71,27 +70,38 @@
 						
                         <div class="row py-9">
                             <div class="card py-2">
+
                                 <table class="table table-striped" style="width: 700px;">
                                     <tr>
                                         <th>Vacation Type</th>
-                                        <td>Vacation</td>
+                                        <td>@ViewBag.Timeoff.type</td>
                                     </tr>
                                     <tr>
                                         <th>Vacation Description</th>
-                                        <td>Going to Paris.</td>
+                                        <td> @ViewBag.Timeoff.description</td>
+
                                     </tr>
                                     <tr>
                                         <th>Vacation Start</th>
-                                        <td>Sepetember 30, 2018</td>
+                                        <td>@ViewBag.Timeoff.startDate</td>
                                     </tr>
                                     <tr>
                                         <th>Vacation End</th>
-                                        <td>October 3, 2018</td>
+                                        <td>@ViewBag.Timeoff.endDate</td>
                                     </tr>
 
                                     <tr>
                                         <th>Approved</th>
-                                        <td>Pending</td>
+                                        @if (@ViewBag.Timeoff.approve)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else
+                                        {
+
+                                            <td>Pending</td>
+                                        }
+
                                     </tr>
                                 </table>
                             </div>   

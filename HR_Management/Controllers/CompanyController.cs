@@ -51,10 +51,17 @@ namespace HR_Management.Controllers
             return View();
         }
 
-        public IActionResult TimeOffList()
+        public async Task<IActionResult> TimeOffList()
         {
             ViewData["Message"] = "All company timeoff requests";
-
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var AllTimeoffs = _context.TimeOff.Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
+            new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
+            ViewData["AllTimeoffs"] = new SelectList(AllTimeoffs);
             return View();
         }
 

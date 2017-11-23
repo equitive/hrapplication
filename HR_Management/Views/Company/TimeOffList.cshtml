@@ -84,8 +84,26 @@
                                         <th>Vacation Start</th>
                                         <th>Vacation End</th>
                                         <th>Approved</th>
-                                    </tr>                                   
-                                    <tr>
+                                    </tr>       
+                                    @foreach (var timeoff in ViewBag.AllTimeoffs.Items)
+                                    {
+                                        <tr>
+                                            <td>@timeoff.mgrfname @timeoff.mgrlname</td>
+                                            <td>@timeoff.type</td>
+                                            <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff" asp-route-id="@timeoff.ID">@timeoff.description</a></td>
+                                            <td>@timeoff.startDate</td>
+                                            <td>@timeoff.endDate</td>
+                                            @if (timeoff.approved)
+                                            {
+                                                <td>Approved</td>
+                                            }
+                                            else
+                                            {
+                                                <td> Pending</td>
+                                            }
+                                        </tr>
+                                    }
+                                    @*<tr>
                                         <td>Ike Tocode</td>
                                         <td>Vacation</td>
                                         <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Going to Paris.</a></td>
@@ -140,7 +158,7 @@
                                         <td>March 31, 2014</td>
                                         <td>July 21, 2014</td>
                                         <td>Denied</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

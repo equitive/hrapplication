@@ -60,9 +60,9 @@
                                                     <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-text-teal"> Return to Complaints </a> 
 													<br>
 													<br>
-													<p class="card-text"><b>Complaint From:</b> Ike Tocode</p>
-                                                    <p class="card-text"><b>Date Delivered</b> May 15, 2017</p>
-                                                    <p class="card-text"><b>Status: </b> Pending</p>
+													<p class="card-text"><b>Complaint From:</b> @ViewBag.FromName</p>
+                                                    <p class="card-text"><b>Date Delivered</b> @ViewBag.Complaint.date</p>
+                                                    <p class="card-text"><b>Status: </b> @ViewBag.Complaint.status</p>
                                                 </div>
                                                 <br>
                                             </div>
@@ -75,11 +75,11 @@
                         <div class="row py-9">
                             <div class="card py-2">
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>Low Salary</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>@ViewBag.Complaint.title</h5></li>
                                 </div>
                                 <br>
                                 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                @ViewBag.Complaint.description
                                 <br>
                             </div>   
                         </div>

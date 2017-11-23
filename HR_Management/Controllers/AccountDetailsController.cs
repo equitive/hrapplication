@@ -30,7 +30,7 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
-            PositionInfo pst = _context.PositionInfo.Where(x => x.empId == emp.empId).First();
+            PositionInfo pst = _context.PositionInfo.Where(x => x.empId == emp.empId && x.status == true).First();
             ViewData["EmpType"] = emp.employeeType;
             ViewData["Employee"] = emp;
             ViewData["salary"] = pst.salary;
