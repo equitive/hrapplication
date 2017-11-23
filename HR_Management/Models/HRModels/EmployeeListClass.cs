@@ -7,6 +7,7 @@ namespace HR_Management.Models.HRModels
 {
     public class EmployeeListClass
     {
+       public int empid { get; set; }
        public string fname { get; set; }
        public string lname { get; set; } 
        public string position { get; set; }

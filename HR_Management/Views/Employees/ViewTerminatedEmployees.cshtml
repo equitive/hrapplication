@@ -83,18 +83,19 @@
                                         <th>Photo</th>
                                         <th>Employee Name</th>
                                         <th>Position</th>
-                                        <th>Manager</th>
-                                        <th>Status</th>
-                                        <th>View Notice</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Ike Tocode </a> </td>
-                                        <td>Senior Software Developer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice"> View Notice </a> </td>
-                                    </tr>
+                                        <th>Department</th>
+                                        <th>ManagerID</th>
+                                    </tr>                      
+                                    @foreach (var emp in ViewBag.TerminatedEmployees.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
+                                            <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@emp.empID"> @emp.fname @emp.lname </a> </td>
+                                            <td>@emp.jobTitle</td>
+                                            <td>@emp.department</td>
+                                            <td>@emp.managerID</td>
+                                        </tr>
+                                    }
                                 </table>
                             </div>
                         </div>

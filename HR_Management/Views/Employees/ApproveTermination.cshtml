@@ -64,17 +64,18 @@
                                                 <br>
                                                 <div class="card-text w3-text-grey">
 
-                                                    <form class="form-horizontal">
+                                                    <form class="form-horizontal" asp-action="ApproveTermination">
                                                         <h4 class="w3-text-grey"> Complete all fields to terminate an employee.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
                                                             <label class="col-md-2 control-label"></label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"  placeholder="Termination Reason"/>
+                                                                <input class="form-control" type="text" name="reason" placeholder="Termination Reason"/>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
+                                                        <input type="hidden" name="empId" value="@ViewBag.ID" />
                                                         <div class="form-group">
                                                             <div class="col-md-offset-2 col-md-10">
                                                                 <button type="submit" class="btn btn-default">Terminate Employee </button>

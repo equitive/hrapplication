@@ -7,6 +7,8 @@ namespace HR_Management.Models.HRModels
 {
     public class EmpPosJoined
     {
+        public int managerID { get; set; }
+        public int empID { get; set; }
         public string fname { get; set; }
         public string lname { get; set; }
         public string email { get; set; }

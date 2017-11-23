@@ -86,7 +86,17 @@
                                         <th>Position</th>
                                         <th>Email</th>
                                     </tr>  
-                                    <tr>
+                                    @foreach (var emp in ViewBag.AllEmployees.Items)
+                                    {
+                                        <tr>
+                                            <td>@emp.rank</td>
+                                            <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@emp.empid">@emp.fname @emp.lname</a></td>
+                                            <td>@emp.position</td>
+                                            <td>@emp.email</td>
+                                        </tr>
+                                    }
+                                    @*<tr>
                                         <td>1</td>
                                         <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
                                         <td>Matheus Melo Pereira</td>
@@ -169,7 +179,7 @@
                                         <td>Ike Tocode</td>
                                         <td>Senior Software Developer</td>
                                         <td>itocode@hackerland.com</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

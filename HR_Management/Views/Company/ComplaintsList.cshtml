@@ -79,12 +79,20 @@
                                 </div>
                                   <table class="table table-striped" style="width: 1200px;">
                                     <tr>
-                                        <th>From</th>
+                                        @*<th>From</th>*@
                                         <th>Title</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                    </tr>                                   
-                                    <tr>
+                                    </tr>                   
+                                     @foreach (var complaint in ViewBag.AllComplaints.Items)
+                                     {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint" asp-route-id="@complaint.ID">@complaint.title</a></td>
+                                            <td>@complaint.date</td>
+                                            <td>@complaint.status</td>
+                                        </tr>
+                                     }
+                                    @*<tr>
                                         <td>Ike Tocode</td>
                                         <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Low Salary</a></td>
                                         <td>September 17, 2017</td>
@@ -113,7 +121,7 @@
                                         <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">2014 Denied Vacation</a></td>
                                         <td>February 15, 2014</td>
                                         <td>Resolved</td>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

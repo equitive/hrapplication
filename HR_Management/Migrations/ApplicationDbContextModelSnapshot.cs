@@ -171,6 +171,8 @@ namespace HR_Management.Migrations
 
                     b.Property<int>("empId");
 
+                    b.Property<DateTime?>("endDate");
+
                     b.Property<string>("jobDescription");
 
                     b.Property<string>("jobTitle");
@@ -178,6 +180,8 @@ namespace HR_Management.Migrations
                     b.Property<int>("managerID");
 
                     b.Property<double>("salary");
+
+                    b.Property<DateTime>("startDate");
 
                     b.Property<bool>("status");
 
