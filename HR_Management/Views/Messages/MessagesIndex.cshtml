@@ -5,7 +5,6 @@
     <!-- Employee Messages Page --Page where any employee can view their messages -->
 
 
-
 <div class="body-style">
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
@@ -57,9 +56,13 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Messages</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> 3 Unread Messages 
-                                                        @ViewBag.MessageCount</b>
-                                                   
+                                                    <b> @ViewBag.MessageCount Total Messages </b>                                                   
+                                                    <br>
+                                                    <br>
+                                                    <b> @ViewBag.MessageCountUnread Unread Messages </b>
+                                                    <br>
+                                                    <br>
+                                                    <a asp-area="" asp-controller="Messages" asp-action="AddMessage" class="w3-text-teal">Create New Message</a>
                                                     <br>
                                                 </div>
                                                 <br>
@@ -77,7 +80,7 @@
                                 </div>
                                 <table class="table table-striped" style="width: 1200px;">
                                     <tr>
-                                        <th>Unread?</th>
+                                        <th>Read</th>
                                         <th>Date</th>
                                         <th>From</th>
                                         <th>Title</th>
@@ -96,13 +99,14 @@
                                                 <td><center><i class="fa fa-circle-o"></i></center></td>
                                             }
 
-                                            <td>@message.date</td>
+                                            <td>@(DateTime.ParseExact(message.date, "M/d/yyyy h:m:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToString("D"))</td>
+                                            
                                             <td>@message.fnameFrom @message.lnameFrom</td>
                                             <td><a asp-area="" asp-controller="Messages" asp-route-id="@message.messageID" asp-action="ViewMessage">@message.title</a></td>
                                             <th><center><i class="fa fa-trash-o"></i></center></th>
                                         </tr>
                                     }
-                                    <tr>
+                                    @*<tr>
                                         <td><center><i class="fa fa-dot-circle-o"></i></center></td> 
                                         <td>October 5, 2017</td>
                                         <td>Hackerland HR</td>
@@ -136,7 +140,7 @@
                                         <td>Hackerland HR</td>
                                         <td><a asp-area="" asp-controller="Messages" asp-action="ViewMessage">We Received Your Complaint: Low Salary</a></td>
                                         <th><center><i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
+                                    </tr>*@
                                 </table>
                             </div>
                         </div>

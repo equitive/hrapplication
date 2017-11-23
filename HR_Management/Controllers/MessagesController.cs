@@ -25,10 +25,19 @@ namespace HR_Management.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult ViewMessage(int ID)
+        public async Task<IActionResult> ViewMessage(int ID)
 		{
             Messages message = _context.Messages.Where(x => x.ID == ID).First();
+            
+            
+            Employee empfrom = _context.Employee.Where(x => x.empId == message.employeeFromID).First();
+            Employee empto = _context.Employee.Where(x => x.empId == message.employeeToID).First();
             ViewData["Message"] = message;
+            ViewData["EmpFrom"] = empfrom.fname + " " + empfrom.lname;
+            ViewData["EmpTo"] = empto.fname + " " + empto.lname;
+            message.isRead = true;
+            _context.Entry(message).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
             return View();
         }
 
@@ -42,9 +51,13 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var messages = _context.Messages.Where(x => x.employeeFromID == emp.empId).Join(_context.Employee, c => c.employeeFromID, d => d.empId, (c, d) => new MessageFromClass { messageID = c.ID, fnameFrom = d.fname, lnameFrom = d.lname, date = c.date, title = c.content, content = c.content, isRead = c.isRead}).OrderBy(c => c.date);
-            var count = messages.Count();
+            var countRead = messages.Where(x => x.isRead == true).Count();
+            var countUnread = messages.Where(x => x.isRead == false).Count();
+            var countTotal = countUnread + countRead;
             ViewData["Messages"] = new SelectList(messages);
-            ViewData["MessageCount"] = count;
+            ViewData["MessageCount"] = countTotal;
+            ViewData["MessageCountRead"] = countRead;
+            ViewData["MessageCountUnread"] = countUnread;
             ViewData["Message"] = "Page to view all messages.";
 			return View();
 		}

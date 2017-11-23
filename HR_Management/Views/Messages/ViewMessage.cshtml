@@ -59,11 +59,13 @@
                                                 <br>
 												<div class="card-text w3-text-grey">
                                                     <br>
-													<p class="card-text"><b>From:</b> Hackerland HR</p>
-                                                    <p class="card-text"><b>To:</b> Ike Tocode</p>
-                                                    <p class="card-text"><b>Date:</b> October 5, 2017 </p>
-                                                    <p class="card-text"><h5><b>Title:</b> Sick Leave Approved </h5></p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+													<p class="card-text"><b>From:</b> @ViewBag.EmpFrom</p>
+                                                    <p class="card-text"><b>To:</b> @ViewBag.EmpTo</p>
+                                                    <p class="card-text">
+                                                        <b>Date:</b> @(DateTime.ParseExact(ViewBag.Message.date, "M/d/yyyy h:m:ss tt", System.Globalization.CultureInfo.InvariantCulture).ToString("D"))
+                                                    </p>
+                                                    <p class="card-text"><h5><b>Title:</b> @ViewBag.Message.title </h5></p>
+                                                    @ViewBag.Message.content
                                                     <br>
                                                 </div>
                                                 <br>
