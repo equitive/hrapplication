@@ -31,14 +31,13 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
-            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department}).Where(v => v.department == emp.department);
+            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId,department = c.department}).Where(v => v.department == emp.department);
             Employee mgr = _context.Employee.Where(y => y.department == emp.department && y.employeeType == 1).First();
             ViewData["Message"] = "Page to view all team members.";
             ViewData["Employees"] = new SelectList(employees);
             ViewData["Manager"] = mgr;
 			return View();
 		}
-
 		public IActionResult EditTeamMember()
 		{
 			ViewData["Message"] = "Page to edit a team member.";
@@ -46,18 +45,34 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult ViewTeamMember()
+		public IActionResult ViewTeamMember(int ID)
 		{
+            //Show the info the selected Team Member
 			ViewData["Message"] = "Page to view one team member.";
+            var ChosenEmployee = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(x => x.empID == ID).First();
+            Employee ChosenEmployee2 = _context.Employee.Where(x => x.empId == ID).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == ChosenEmployee.managerID).First();
+            ViewData["ChosenEmployee"] = ChosenEmployee;
+            ViewData["ChosenEmployee2"] = ChosenEmployee2;
+            ViewData["ChosenManager"] = mgr;
 
-			return View();
+            return View();
 		}
 
-		public IActionResult ViewTeamManager()
+		public async Task<IActionResult> ViewTeamManager()
 		{
-			ViewData["Message"] = "Page to view team manager/hr view.";
-
-			return View();
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID=c.empId }).Where(v => v.department == emp.department);
+            Employee mgr = _context.Employee.Where(y => y.department == emp.department && y.employeeType == 1).First();
+            ViewData["Message"] = "Page to view team manager/hr view.";
+            ViewData["Employees"] = new SelectList(employees);
+            ViewData["Manager"] = mgr;
+            return View();
 		}
 
 
