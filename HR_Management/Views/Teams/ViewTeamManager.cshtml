@@ -81,47 +81,19 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Status</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Ike Tocode </a> </td>
-                                        <td>Senior Software Developer</td>
-										<td>itocode@hackerland.com</td>
-                                        <td>123-456-7890</td>
-                                        <td>Good Standing</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Thomas R. Etheridge</a></td>
-                                        <td>Software Developer</td>
-                                        <td>etheridge@hackerland.com</td>
-                                        <td>234-567-8901</td>
-                                        <td>Good Standing</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Fang Wei</a></td>
-                                        <td>Intern</td>
-                                        <td>fwei@hackerland.com</td>
-                                        <td>456-789-0123</td>
-                                        <td>Good Standing</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Onyeorulu Ikedinachukwu</a></td>
-                                        <td>Junior Electrical Engineer</td>
-                                        <td>oikedinachukwu@hackerland.com</td>
-                                        <td>567-890-1234</td>
-                                        <td>Good Standing</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember">Yahyah Shamil Najjar</a></td>
-                                        <td>Mechanical Engineer</td>
-                                        <td>ynajjar@hackerland.com</td>
-                                        <td>678-901-2345</td>
-                                        <td>Good Standing</td>
-                                    </tr>
+                                    </tr>   
+                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
+                                            <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@employee.empID">@employee.fname @employee.lname</a> </td>
+                                            <td>@employee.jobTitle</td>
+                                            <td>@employee.email</td>
+                                            <td>@employee.phoneNumber</td>
+                                            <td>@employee.status</td>  
+                                        </tr>
+                                    }
+
                                 </table>
                             </div>
                         </div>
@@ -131,4 +103,3 @@
         </div> 
     </div>
 </div>
-        

@@ -61,10 +61,10 @@
                                                     <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:160px">
                                                 </div>
                                                 <br>
-                                                <p class="card-text"><b>Full Name:</b> Ike Tocode</p>
-                                                <p class="card-text"><b>Position:</b> Senior Software Developer</p>
-                                                <p class="card-text"><b>Company Rank</b> 12</p>
-                                                <p class="card-text"><b>Status:</b> Good Standing</p>
+                                                <p class="card-text"><b>Full Name:</b> @ViewBag.ChosenEmployee.fname @ViewBag.ChosenEmployee.lname</p>
+                                                <p class="card-text"><b>Position:</b> @ViewBag.ChosenEmployee.jobTitle</p>
+                                                <p class="card-text"><b>Rank</b> @ViewBag.ChosenEmployee2.rank</p>
+                                                <p class="card-text"><b>Status:</b> @ViewBag.ChosenEmployee.status</p>
                                             </div>
                                         </div>
                                     </div>
@@ -80,23 +80,23 @@
                                 <table class="table table-striped" style="width: 700px;">
                                     <tr>
                                         <th>First Name</th>
-                                        <td>Ike</td>
+                                        <td>@ViewBag.ChosenEmployee.fname</td>
                                     </tr>
                                     <tr>
                                         <th>Last Name</th>
-                                        <td>Tocode</td>
+                                        <td>@ViewBag.ChosenEmployee.lname</td>
                                     </tr>
                                     <tr>
                                         <th>Address</th>
-                                        <td>123 Java Lane Hacker, Hackland 73373</td>
+                                        <td>@ViewBag.ChosenEmployee2.address</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>itocode@hackerland.com</td>
+                                        <td>@ViewBag.ChosenEmployee.email</td>
                                     </tr>
                                     <tr>
                                         <th>Phone Number</th>
-                                        <td>123-456-7890</td>
+                                        <td>@ViewBag.ChosenEmployee.phoneNumber</td>
                                     </tr>
                                 </table>
                             </div>
@@ -109,68 +109,65 @@
                                 <table class="table table-striped" style="width: 700px;">
                                     <tr>
                                         <th>Employee ID</th>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Username</th>
-                                        <td>itocode</td>
+                                        <td>@ViewBag.ChosenEmployee.empID</td>
                                     </tr>
                                     <tr>
                                         <th>Manager</th>
-                                        <td>Ove ToManage</td>
+                                        <td>@ViewBag.ChosenManager.fname @ViewBag.ChosenManager.lname</td>
                                     </tr>
                                     <tr>
                                         <th>Department</th>
-                                        <td>Engineering</td>
+                                        <td>@ViewBag.ChosenEmployee.department</td>
                                     </tr>
                                     <tr>
                                         <th>Position</th>
-                                        <td>Senior Software Developer</td>
+                                        <td>@ViewBag.ChosenEmployee.jobTitle</td>
                                     </tr>
                                     <tr>
                                         <th>Salary</th>
-                                        <td>$120,000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <td>12</td>
+                                        <td>@ViewBag.ChosenEmployee.salary</td>
                                     </tr>
                                     <tr>
                                         <th>Start Date</th>
-                                        <td>June 10, 2004</td>
+                                        <td>@ViewBag.ChosenEmployee.posstartdate</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td>Good Standing</td>
+                                        <td>@ViewBag.ChosenEmployee.status</td>
                                     </tr>
                                 </table>
                             </div>
 
 
-<!--							IF IS TERMINATED-->						
-							<div class="card py-2">
-                                <div class="card-block">
-                                   <li class="list-group-item active card-title" style="width: 70rem;"><h5>Termination Details</h5></li>
+<!--	IF IS TERMINATED-->		
+                            @if (@ViewBag.ChosenEmployee2.status == "Terminated")
+                            {
+                                <div class="card py-2">
+                                    <div class="card-block">
+                                        <li class="list-group-item active card-title" style="width: 70rem;"><h5>Termination Details</h5></li>
+                                    </div>
+                                    <table class="table table-striped" style="width: 700px;">
+                                        <tr>
+                                            <th>Termination Reason</th>
+                                            <td>@ViewBag.ChosenEmployee2.terminationReason</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Two Weeks Request</th>
+                                            <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice"> View Notice </a> </td>
+                                        </tr>
+                                        <tr>
+                                            <th>End Date</th>
+                                            <td>------</td>
+                                        </tr>
+                                    </table>
                                 </div>
+                            }			
+ <!--End of if Terminated-->
 
-                                <table class="table table-striped" style="width: 700px;">
-                                    <tr>
-                                        <th>Termination Reason</th>
-                                        <td>Lorem Ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Two Weeks Request</th>
-                                        <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice"> View Notice </a> </td>
-
-                                    </tr>
-                                    <tr>
-                                        <th>End Date</th>
-                                        <td>June 11, 2004</td>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
                     </div>
+
+
                     <div class="col-md-3">
                         <div class="col-md-6">
                             <div class="card-block" style="margin-top: 300px;">
