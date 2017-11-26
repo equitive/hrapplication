@@ -83,7 +83,7 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult TimeOffIndexManager()
+		public IActionResult TimeOffIndex()
 		{
 			ViewData["Message"] = "Page to view all the time offs.";
 

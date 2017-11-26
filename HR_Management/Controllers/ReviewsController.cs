@@ -73,12 +73,6 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult ReviewsIndexManager()
-		{
-			ViewData["Message"] = "Page to view all the reviews.";
-
-			return View();
-		}
 
 		public async Task<IActionResult> TeamReviews()
 		{

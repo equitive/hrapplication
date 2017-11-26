@@ -51,6 +51,7 @@ namespace HR_Management.Controllers
             ViewData["DeptRankedEmployees"] = new SelectList(DeptRankedEmployees);
             ViewData["Employee"] = emp;
             ViewData["Manager"] = mgr;
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             return View();
 
 		}
@@ -68,6 +69,7 @@ namespace HR_Management.Controllers
             var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department = c.department, employeeType = c.employeeType }).OrderBy(c=>c.rank);
             ViewData["FullRankedEmployees"] = new SelectList(RankedEmployees);
             ViewData["Manager"] = mgr;
+            ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             return View();
 		}
 

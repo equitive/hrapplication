@@ -69,23 +69,6 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public async Task<ActionResult> ComplaintsIndexManager()
-		{
-            //Lists complaints for manager
-			ViewData["Message"] = "Page to view all the complaints manager view.";
-            //Lists regular employee complaints
-            ViewData["Message"] = "Page to view all the complaints.";
-            var user = await GetCurrentUserAsync();
-            if (user == null)
-            {
-                return View("Error");
-            }
-            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
-            var CurrentComplaintList = _context.Complaints.Where(x => x.empId == emp.empId);
-            ViewData["CurrentManagerComplaints"] = new SelectList(CurrentComplaintList);
-            return View();
-		}
-
 		public IActionResult OutstandingComplaints()
 		{
             //If logged in user is HR, lists all company complaints
