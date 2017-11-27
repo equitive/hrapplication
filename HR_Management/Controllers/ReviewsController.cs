@@ -68,8 +68,12 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var reviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
             new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date) ;
+            int totalReviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
+            new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date).Count();
             ViewData["Reviews"] = new SelectList(reviews);
+            ViewData["CurrentEmployee"] = emp;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["TotalReviews"] = totalReviews;
             return View();
 		}
 
