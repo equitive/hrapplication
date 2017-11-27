@@ -52,19 +52,35 @@ namespace HR_Management.Controllers
             return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
         }
 
-        public IActionResult ApproveTimeOff(int ID, int approve)
+        public async Task<IActionResult> ApproveTimeOff(int ID, int approve)
         {
             ViewData["Message"] = "Page to edit a time off.";
-            TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
-            if(approve == 1)
+            var user = await GetCurrentUserAsync();
+            if (user == null)
             {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
+            Employee empTimeoff = _context.Employee.Where(x => x.empId == timeoff.empId).First();
+            if (approve == 1)
+            {
+                Messages msg = new Messages { title = "Time-off approved", content = "Your request for time-off was approved", date = DateTime.Now.ToString(), employeeToID = empTimeoff.empId, isRead = false, employeeFromID = emp.empId };
+                _context.Messages.Add(msg);
+                await _context.SaveChangesAsync();
                 timeoff.approve = true;
             } else
             {
+                Messages msg = new Messages { title = "Time-off rejected", content = "Your request for time-off was rejected", date = DateTime.Now.ToString(), employeeToID = empTimeoff.empId, isRead = false, employeeFromID = emp.empId };
+                _context.Messages.Add(msg);
+                await _context.SaveChangesAsync();
                 timeoff.approve = false;
             }
             _context.Entry(timeoff).State = EntityState.Modified;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+
+
             return RedirectToAction(nameof(TimeOffController.OutstandingTimeOff), "TimeOff");
         }
 
@@ -139,11 +155,16 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             ViewData["Message"] = "Page to add a time off.";
             TimeOff newtoff = new TimeOff();
             newtoff.approve = false; newtoff.description = description; newtoff.empId = emp.empId; newtoff.endDate = endDate.ToString();
             newtoff.startDate = startDate.ToString(); newtoff.type = type;
             _context.TimeOff.Add(newtoff);
+            await _context.SaveChangesAsync();
+            Messages msg = new Messages { title = "Time-off request submitted", content = "Time-off request submitted by employee " + emp.fname + " " + emp.lname + ".", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = mgr.empId};
+            Messages msg2 = new Messages { title = "Time-off request submitted by your team member", content = "Time-off request submitted by employee " + emp.fname + " " + emp.lname + ".", date = DateTime.Now.ToString(), employeeToID = mgr.empId, isRead = false, employeeFromID = emp.empId};
+            _context.Messages.AddRange(msg, msg2);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
         }

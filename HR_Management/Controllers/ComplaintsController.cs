@@ -45,8 +45,12 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             Complaints compl = _context.Complaints.Where(x => x.ID == ID).First();
-            
+            Employee empCompl = _context.Employee.Where(x => x.empId == compl.empId).First();
             ViewData["ShowStatusChange"] = compl.empId == emp.empId ? false : emp.employeeType == 0 ? false : true;
+
+            Messages msg = new Messages { title = "Complaint edited", content = "Complaint filed by employee " + empCompl.fname + " " + empCompl.lname + " has been changed.", date = DateTime.Now.ToString(), employeeToID = empCompl.empId, isRead = false, employeeFromID = -1 };
+            _context.Messages.Add(msg);
+            await _context.SaveChangesAsync();
             return View(compl);
         }
 
@@ -126,6 +130,9 @@ namespace HR_Management.Controllers
             complaint.description = description;
             complaint.empId = emp.empId;
             _context.Complaints.Add(complaint);
+            await _context.SaveChangesAsync();
+            Messages msg = new Messages { title = "Complaint filed", content = "Complaint filed by employee " + emp.fname + " " + emp.lname + ".", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = -1 };
+            _context.Messages.Add(msg);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ComplaintsController.ComplaintsIndex), "Complaints");
         }

@@ -59,6 +59,13 @@ namespace HR_Management.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPosition(string title, string description, int managerID, int empId, double salary)
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emploggedin = _context.Employee.Where(x => x.appuserid == user.Id).First();
+
             ViewData["Message"] = "Page to view add positions.";
             Employee emp = _context.Employee.Where(x => x.empId == empId).First();
             PositionInfo pos = _context.PositionInfo.Where(x => x.empId == emp.empId).Where(y => y.status == true).First();
@@ -72,6 +79,9 @@ namespace HR_Management.Controllers
             emp.jobTitle = newpos.ID;
             emp.managerID = managerID;
             _context.Entry(emp).State = EntityState.Modified;
+            Messages msg = new Messages { title = "Your position has changed", content = "You have a new position within the company. Your job title is " + title + ".", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = emploggedin.empId };
+            _context.Messages.Add(msg);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(PositionsController.PositionsIndex), "Positions");
         }
 

@@ -115,7 +115,7 @@ namespace HR_Management.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddReview(string fname, string lname, string title, string description, int score)
+        public async Task<IActionResult> AddReview(int empId, string title, string description, int score)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -123,7 +123,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
-            Employee empreviewed = _context.Employee.Where(x => x.fname == fname && x.lname == lname).First();
+            Employee empreviewed = _context.Employee.Where(x => x.empId == empId).First();
             ViewData["Message"] = "Page to add a time off.";
             Reviews review = new Reviews();
             review.date = DateTime.Now.ToString();
@@ -133,6 +133,10 @@ namespace HR_Management.Controllers
             review.description = description;
             review.empId = empreviewed.empId;
             _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+            Messages msg = new Messages { title = "Review submitted", content = "Review submitted by manager " + emp.fname + " " + emp.lname + " for employee " + empreviewed.fname + " " + empreviewed.lname + " .", date = DateTime.Now.ToString(), employeeToID = empreviewed.empId, isRead = false, employeeFromID = emp.empId };
+            Messages msg2 = new Messages { title = "Review submitted", content = "Review submitted by manager " + emp.fname + " " + emp.lname + " for employee " + empreviewed.fname + " " + empreviewed.lname + " .", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = empreviewed.empId };
+            _context.Messages.AddRange(msg, msg2);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ReviewsController.ReviewsIndex), "Reviews");
         }
