@@ -92,6 +92,9 @@
                                             <td>@position.posstartdate</td>
                                             <td>@position.jobTitle</td>
                                             <td>$@position.salary</td>
+                                            <td>
+                                                <a asp-area="" asp-controller="Positions" asp-action="AddPosition" asp-route-id="@position.empID"> Change Position </a>
+                                            </td>
                                         </tr>
                                     }
                                     @*<tr>

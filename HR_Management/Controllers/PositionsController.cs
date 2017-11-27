@@ -49,10 +49,10 @@ namespace HR_Management.Controllers
 		}
 
         [HttpGet]
-		public IActionResult AddPosition()
+		public IActionResult AddPosition(int ID)
 		{
 			ViewData["Message"] = "Page to view add positions.";
-
+            ViewData["empId"] = ID;
 			return View();
 		}
 
