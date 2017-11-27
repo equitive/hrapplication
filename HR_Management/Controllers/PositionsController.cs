@@ -89,11 +89,15 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult TeamMemberPosition()
+		public IActionResult TeamMemberPosition(int id)
 		{
 			ViewData["Message"] = "Page to edit complaint status.";
-
-			return View();
+            Employee empA = _context.Employee.Where(z => z.empId == id).First();
+            var positions = _context.PositionInfo.Where(z => z.empId == id).Join(_context.Employee, c => c.managerID, d => d.empId, (c, d) =>
+                new PosMgrJoined { status = c.status, startDate = c.startDate, endDate = c.endDate, salary = c.salary, jobTitle = c.jobTitle, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(y => y.startDate);
+            ViewData["Positions"] = new SelectList(positions);
+            ViewData["CurrentEmployee"] = empA;
+            return View();
 
 		}
 

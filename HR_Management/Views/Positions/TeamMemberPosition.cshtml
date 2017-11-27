@@ -13,7 +13,7 @@
           <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
         </div>
         <div class="w3-col s9 w3-bar">
-          <span>Welcome, <strong>Ike</strong></span><br>
+          <span>Welcome, <strong>@ViewBag.CurrentEmployee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
@@ -59,7 +59,7 @@
                                         <div class="col-md-9 px-2">
                                             <br>
                                             <div class="card-block px-3">
-                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Positions: Ike Tocode</h3></li>
+                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Positions: @ViewBag.CurrentEmployee.fname @ViewBag.CurrentEmployee.lname</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
                                                     <b> <a asp-area="" asp-controller="Positions" asp-action="AddPosition" class="w3-bar-item w3-button w3-padding w3-blue"> Add Position </a></b>
@@ -85,21 +85,18 @@
                                         <th>Position Title</th>
                                         <th>Manager</th>
                                         <th>Salary</th>
-                                    </tr>  
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>January 10, 2016</td>
-                                        <td>Senior Software Developer</td>
-                                        <td>Gon Retire</td>
-                                        <td>$120,000</td>
                                     </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>April 1, 2007</td>
-                                        <td>Junior Developer</td>
-                                        <td>Felix M. Hedegaard</td>
-                                        <td>$60,000</td>
-                                    </tr>
+                                    @foreach (var position in (IEnumerable<dynamic>)ViewBag.Positions.Items)
+                                    {
+                                        <tr>
+                                            <td>@ViewBag.CurrentEmployee.fname @ViewBag.CurrentEmployee.lname</td>
+                                            <td>@position.startDate</td>
+                                            <td>@position.jobTitle</td>
+                                            <td>@position.mgrfname @position.mgrlname</td>
+                                            <td>$@position.salary</td>
+                                        </tr>
+                                    }
+
                                 </table>
                             </div>
                         </div>

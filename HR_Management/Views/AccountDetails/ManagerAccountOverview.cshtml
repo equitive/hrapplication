@@ -13,7 +13,7 @@
           <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
         </div>
         <div class="w3-col s9 w3-bar">
-          <span>Welcome, <strong>Ike</strong></span><br>
+          <span>Welcome, <strong>@ViewBag.Employee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
@@ -26,7 +26,7 @@
       <div class="w3-bar-block">
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
         <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverview" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-address-card-o fa-fw"></i>  Account Overview</a>
-        <a asp-area="" asp-controller="Teams" asp-action="ViewTeam" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  View Team</a>
+        <a asp-area="" asp-controller="Teams" asp-action="ViewTeamManager" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  View Team</a>
         <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
         <a asp-area="" asp-controller="Reviews" asp-action="reviewsindex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
         <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
@@ -60,10 +60,10 @@
                                                     <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:160px">
                                                 </div>
                                                 <br>
-                                                <p class="card-text"><b>Full Name:</b> Ike Tocode</p>
-                                                <p class="card-text"><b>Position:</b> Senior Software Developer</p>
-                                                <p class="card-text"><b>Company Rank</b> 12</p>
-                                                <p class="card-text"><b>Status:</b> Good Standing</p>
+                                                <p class="card-text"><b>Full Name:</b> @ViewBag.Employee.fname @ViewBag.Employee.lname</p>
+                                                <p class="card-text"><b>Position:</b> @ViewBag.jobTitle</p>
+                                                <p class="card-text"><b>Company Rank</b> @ViewBag.Employee.rank</p>
+                                                <p class="card-text"><b>Status:</b> @ViewBag.Employee.status</p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,23 +79,23 @@
                                 <table class="table table-striped" style="width: 700px;">
                                     <tr>
                                         <th>First Name</th>
-                                        <td>Ove</td>
+                                        <td>@ViewBag.Employee.fname</td>
                                     </tr>
                                     <tr>
                                         <th>Last Name</th>
-                                        <td>Tomanage</td>
+                                        <td>@ViewBag.Employee.lname</td>
                                     </tr>
                                     <tr>
                                         <th>Address</th>
-                                        <td>123 Python Street Hacker, Hackland 73337</td>
+                                        <td>@ViewBag.Employee.address</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>otm@hackerland.com</td>
+                                        <td>@ViewBag.Employee.email</td>
                                     </tr>
                                     <tr>
                                         <th>Phone Number</th>
-                                        <td>345-678-9012</td>
+                                        <td>@ViewBag.Employee.phoneNumber</td>
                                     </tr>
                                 </table>
                             </div>
@@ -108,39 +108,31 @@
                                 <table class="table table-striped" style="width: 700px;">
                                     <tr>
                                         <th>Employee ID</th>
-                                        <td>23</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Username</th>
-                                        <td>otomanage</td>
+                                        <td>@ViewBag.Employee.empId</td>
                                     </tr>
                                     <tr>
                                         <th>Manager</th>
-                                        <td>Hugo Boss</td>
+                                        <td>@ViewBag.manager</td>
                                     </tr>
                                     <tr>
                                         <th>Department</th>
-                                        <td>Engineering</td>
+                                        <td>@ViewBag.Employee.department</td>
                                     </tr>
                                     <tr>
                                         <th>Position</th>
-                                        <td>Engineering Manager</td>
+                                        <td>@ViewBag.jobTitle</td>
                                     </tr>
                                     <tr>
                                         <th>Salary</th>
-                                        <td>$500,000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <td>3</td>
+                                        <td>@ViewBag.salary</td>
                                     </tr>
                                     <tr>
                                         <th>Start Date</th>
-                                        <td>March 5, 2000</td>
+                                        <td>@ViewBag.salary</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td>Good Standing</td>
+                                        <td>@ViewBag.Employee.status</td>
                                     </tr>
                                 </table>
                             </div>
@@ -155,32 +147,15 @@
                                         <th>Photo</th>
                                         <th>Employee Name</th>
                                         <th>Position</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Ike Tocode </a> </td>
-                                        <td>Senior Software Developer</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Thomas R. Etheridge </a> </td>
-                                        <td>Software Developer</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Fang Wei </a> </td>
-                                        <td>Intern</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Onyeorulu Ikedinachukwu </a> </td>
-                                        <td>Junior Electrical Engineer</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Yahyah Shamil Najjar </a> </td>
-                                        <td>Mechanical Engineer</td>
-                                    </tr>
+                                    </tr> 
+                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
+                                            <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@employee.empID">@employee.fname @employee.lname</a> </td>
+                                            <td>@employee.jobTitle</td>
+                                        </tr>
+                                    }
                                 </table>
                             </div>
                         </div>

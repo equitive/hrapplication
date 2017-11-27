@@ -90,10 +90,15 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult TeamMemberReviews()
+		public IActionResult TeamMemberReviews(int id)
 		{
 			ViewData["Message"] = "Page to edit complaint status.";
-
+            Employee emp = _context.Employee.Where(z => z.empId == id).First();
+            Employee mgr = _context.Employee.Where(z => z.empId == emp.managerID).First();
+            var allReviews = _context.Reviews.Where(z => z.empId == id);
+            ViewData["AllReviews"] = new SelectList(allReviews);
+            ViewData["CurrentEmployee"] = emp;
+            ViewData["CurrentManager"] = mgr;
 			return View();
 		}
 

@@ -83,12 +83,12 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult TimeOffIndex()
-		{
-			ViewData["Message"] = "Page to view all the time offs.";
+		//public IActionResult TimeOffIndex()
+		//{
+		//	ViewData["Message"] = "Page to view all the time offs.";
 
-			return View();
-		}
+		//	return View();
+		//}
 
 		public async Task<IActionResult> OutstandingTimeOff()
 		{
@@ -112,10 +112,13 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult TeamMemberTimeOff()
+		public IActionResult TeamMemberTimeOff(int id)
 		{
 			ViewData["Message"] = "Page to edit complaint status.";
-
+            Employee emp = _context.Employee.Where(z => z.empId == id).First();
+            var allTimeOff = _context.TimeOff.Where(z => z.empId == id);
+            ViewData["CurrentEmployee"] = emp;
+            ViewData["AllTimeOff"] = new SelectList(allTimeOff);
 			return View();
 		}
 
