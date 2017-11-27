@@ -108,9 +108,16 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var timeofs = _context.TimeOff.Where(x => x.empId == emp.empId);
+            int timeoffsTotal= _context.TimeOff.Where(x => x.empId == emp.empId).Count();
+            int VacationDays = _context.TimeOff.Where(x => x.empId == emp.empId && x.type =="Vacation").Count();
+            int SickDays = _context.TimeOff.Where(x => x.empId == emp.empId && x.type == "Sick Day").Count();
             ViewData["TimeOffs"] = new SelectList(timeofs);
+            ViewData["TotalSickDays"] = SickDays;
+            ViewData["TotalVacationDays"] = VacationDays;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["CurrentEmployee"] = emp;
+            ViewData["TotalRequests"] = timeoffsTotal ;
             return View();
 		}
 
@@ -130,10 +137,16 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
-            var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
+            var CurrentTeam = _context.Employee.Where(x => x.managerID == emp.ID);
+            var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
+            int totalRows =_context.TimeOff.Where(v => v.approve == false).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
+            new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID).Count();
+            ViewData["TotalRows"] = totalRows;
+            ViewData["CurrentEmployee"] = emp;
             ViewData["AllTimeoffs"] = new SelectList(AllTimeoffs);
             ViewData["EmpType"] = emp.employeeType;
+
             return View();
 		}
 
