@@ -33,9 +33,13 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId,department = c.department}).Where(v => v.department == emp.department);
             Employee mgr = _context.Employee.Where(y => y.department == emp.department && y.employeeType == 1).First();
+            int total= _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId, department = c.department }).Where(v => v.department == emp.department).Count();
+
             ViewData["Message"] = "Page to view all team members.";
+            ViewData["CurrentEmployee"] = emp;
             ViewData["Employees"] = new SelectList(employees);
             ViewData["Manager"] = mgr;
+            ViewData["totalTeam"] = total;
 			return View();
 		}
 		public IActionResult EditTeamMember()
