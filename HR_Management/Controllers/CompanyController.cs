@@ -33,7 +33,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             var AllEmployees = _context.Employee.OrderBy(c => c.empId).ToList();
-            var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email }).OrderBy(v => v.rank);
+            var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { posStatus = d.status, empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email }).Where(k => k.posStatus == true).OrderBy(v => v.rank);
             ViewData["AllEmployees"] = new SelectList(EmployeeInfo1);
             return View();
         }

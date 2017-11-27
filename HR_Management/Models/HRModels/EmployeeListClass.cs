@@ -17,5 +17,6 @@ namespace HR_Management.Models.HRModels
        public int managerID { get; set; }
        public string department { get; set; }
        public  int employeeType { get; set; }
+        public bool posStatus { get; set; }
     }
 }
