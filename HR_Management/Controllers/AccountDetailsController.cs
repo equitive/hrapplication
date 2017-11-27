@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using HR_Management.Models;
 using HR_Management.Models.HRModels;
 using HR_Management.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace HR_Management.Controllers
 {
     public class AccountDetailsController : Controller
@@ -81,12 +83,26 @@ namespace HR_Management.Controllers
             return RedirectToAction(nameof(AccountDetailsController.AccountOverview), "AccountDetails");
         }
 
-        public IActionResult ManagerAccountOverview()
+        public async Task<ActionResult> ManagerAccountOverview()
 		{
 			ViewData["Message"] = "Manager application account overview page upon login.";
-
-			return View();
-		}
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
+            PositionInfo pst = _context.PositionInfo.Where(x => x.empId == emp.empId && x.status == true).First();
+            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(v => v.department == emp.department);
+            ViewData["EmpType"] = emp.employeeType;
+            ViewData["Employee"] = emp;
+            ViewData["salary"] = pst.salary;
+            ViewData["manager"] = mgr.fname + " " + mgr.lname;
+            ViewData["jobTitle"] = pst.jobTitle;
+            ViewData["Employees"] = new SelectList(employees);
+            return View();
+        }
 
 		public IActionResult Error()
 		{
