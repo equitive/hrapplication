@@ -14,7 +14,7 @@
           <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
         </div>
         <div class="w3-col s9 w3-bar">
-          <span>Welcome, <strong>Ike</strong></span><br>
+          <span>Welcome, <strong>@ViewBag.CurrentEmployee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
@@ -60,7 +60,7 @@
                                         <div class="col-md-9 px-2">
                                             <br>
                                             <div class="card-block px-3">
-                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-comment-o fa-fw"></i> View Reviews: Ike Tocode</h3></li>
+                                                <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-comment-o fa-fw"></i> View Reviews: @ViewBag.CurrentEmployee.fname @ViewBag.CurrentEmployee.lname</h3></li>
                                                 <br>
                                             </div>
                                         </div>
@@ -81,24 +81,20 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Date</th>
-                                        <th>Review To</th>
+                                        <th>Review By</th>
                                         <th>Numeric Equivalent</th>
                                         <th>Edit/Delete</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2017 Review</a></td>
-                                        <td>May 15, 2017</td>
-                                        <td>Ike Tocode</td>
-                                        <td>75%</td>
-                                        <th><center><a asp-area="" asp-controller="Reviews" asp-action="EditReview"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Reviews" asp-action="ViewReview">2016 Review</a></td>
-                                        <td>May 29, 2016</td>
-                                        <td>Ike Tocode</td>
-                                        <td>50%</td>
-                                        <th><center><a asp-area="" asp-controller="Reviews" asp-action="EditReview"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></th>
-                                    </tr>
+                                    </tr> 
+                                    @foreach (var current in (IEnumerable<dynamic>)ViewBag.AllReviews.Items)
+                                    {
+                                        <tr>
+                                            <td>@current.title</td>
+                                            <td>@current.date</td>
+                                            <td>@ViewBag.CurrentManager.fname @ViewBag.CurrentManager.lname</td>
+                                            <td>@current.score</td>
+                                            <td>Edit/Delete</td>
+                                        </tr>
+                                    }
                                 </table>
                             </div>
                         </div>
