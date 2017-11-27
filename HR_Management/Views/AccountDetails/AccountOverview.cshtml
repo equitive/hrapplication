@@ -12,7 +12,7 @@
           <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
         </div>
         <div class="w3-col s9 w3-bar">
-          <span>Welcome, <strong>Ike</strong></span><br>
+          <span>Welcome, <strong>@ViewBag.Employee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="EditAccountOverviewEmployee" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
@@ -94,7 +94,7 @@
                                                 <br>
                                                 <p class="card-text"><b>Full Name:</b> @ViewBag.Employee.fname @ViewBag.Employee.lname </p>
                                                 <p class="card-text"><b>Position:</b> @ViewBag.jobTitle  </p>
-                                                <p class="card-text"><b>Company Rank</b> @ViewBag.Employee.rank</p>
+                                                <p class="card-text"><b>Rank:</b> @ViewBag.Employee.rank</p>
                                                 <p class="card-text"><b>Status:</b> @ViewBag.Employee.status</p>
                                             </div>
                                         </div>
@@ -141,10 +141,6 @@
                                     <tr>
                                         <th>Employee ID</th>
                                         <td>@ViewBag.Employee.empId</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Username</th>
-                                        <td>We have username?</td>
                                     </tr>
                                     <tr>
                                         <th>Manager</th>
