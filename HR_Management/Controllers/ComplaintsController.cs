@@ -35,10 +35,18 @@ namespace HR_Management.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditComplaint(int ID)
+        public async Task<IActionResult> EditComplaint(int ID)
         {
             ViewData["Message"] = "Page to edit a time off.";
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             Complaints compl = _context.Complaints.Where(x => x.ID == ID).First();
+            
+            ViewData["ShowStatusChange"] = compl.empId == emp.empId ? false : emp.employeeType == 0 ? false : true;
             return View(compl);
         }
 

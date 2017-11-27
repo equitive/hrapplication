@@ -78,7 +78,7 @@ namespace HR_Management.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> AddMessage(string title, string description, string recipientName)
+        public async Task <IActionResult> AddMessage(string title, string description, int empId)
         {
             ViewData["Message"] = "Page to add a message.";
             ViewData["Error"] = "";
@@ -96,7 +96,7 @@ namespace HR_Management.Controllers
             msg.isRead = false;
             try
             {
-                msg.employeeToID = _context.Employee.Where(x => x.fname + " " + x.lname == recipientName).First().empId;
+                msg.employeeToID = _context.Employee.Where(x => x.empId == empId).First().empId;
                 _context.Entry(msg).State = Microsoft.EntityFrameworkCore.EntityState.Added;
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(MessagesController.MessagesIndex), "Messages");

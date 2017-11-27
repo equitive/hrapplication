@@ -62,27 +62,55 @@
                                                         <hr />
 														
                                                         <div asp-validation-summary="All" class="text-danger"></div>
-                                                        <div class="form-group">
-                                                            <label class=" control-label"></label>
-                                                            <div>
-                                                                <input rows="4" cols="500" style="width:600px" class="form-control" asp-for="title" />
-                                                                <span class="text-danger"></span>
+                                                        @if (ViewBag.ShowStatusChange)
+                                                        {
+                                                            <input type="hidden" rows="4" cols="500" style="width:600px" class="form-control" asp-for="title" />
+                                                            <input type="hidden" rows="4" cols="500" style="width:600px" class="form-control" asp-for="description" />
+                                                            <div class="form-group">
+                                                                <label class=" control-label"></label>
+                                                                <div>
+                                                                    <input rows="4" cols="500" style="width:600px" class="form-control" id="title2" disabled/>
+                                                                    <span class="text-danger"></span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class=" control-label"></label>
-                                                            <div>
-                                                                <textarea rows="4" cols="500" style="width:600px" class="form-control" asp-for="description"></textarea>
-                                                                <span class="text-danger"></span>
+                                                            <div class="form-group">
+                                                                <label class=" control-label"></label>
+                                                                <div>
+                                                                    <textarea rows="4" cols="500" style="width:600px" class="form-control" id="description2" disabled></textarea>
+                                                                    <span class="text-danger"></span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class=" control-label"></label>
-                                                            <div>
-                                                                <input rows="4" cols="500" style="width:600px" class="form-control" asp-for="status" />
-                                                                <span class="text-danger"></span>
+                                                            <div class="form-group">
+                                                                <label class=" control-label"></label>
+                                                                <div>
+                                                                    <span class="text-danger"></span>
+                                                                    <select class="form-control" asp-for="status">
+                                                                        <option value="Pending">Pending</option>
+                                                                        <option value="Verifying">Verifying</option>
+                                                                        <option value="Resolved">Resolved</option>
+                                                                        <option value="Investigation In Progress">Investigation In Progress</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="form-group">
+                                                                <label class=" control-label"></label>
+                                                                <div>
+                                                                    <input rows="4" cols="500" style="width:600px" class="form-control" asp-for="title" />
+                                                                    <span class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class=" control-label"></label>
+                                                                <div>
+                                                                    <textarea rows="4" cols="500" style="width:600px" class="form-control" asp-for="description"></textarea>
+                                                                    <span class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" rows="4" cols="500" style="width:600px" class="form-control" asp-for="status" />
+                                                        }
                                                         <input type="hidden" asp-for="ID" />
                                                         <input type="hidden" asp-for="reviewID" />
                                                         <input type="hidden" asp-for="empId" />
@@ -107,3 +135,12 @@
         </div> 
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#title2").val($("#title").val())
+            $("#description2").val($("#description").val())
+        })
+    </script>
+}
