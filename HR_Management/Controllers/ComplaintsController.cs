@@ -24,13 +24,20 @@ namespace HR_Management.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult ViewComplaint(int ID)
+        public async Task<IActionResult> ViewComplaint(int ID)
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to view a specific time off.";
             Complaints complaint = _context.Complaints.Where(x => x.ID == ID).First();
             Employee cmpfrom = _context.Employee.Where(x => x.empId == complaint.empId).First();
             ViewData["Complaint"] = complaint;
             ViewData["FromName"] = cmpfrom.fname + " " + cmpfrom.lname;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 
@@ -51,6 +58,7 @@ namespace HR_Management.Controllers
             Messages msg = new Messages { title = "Complaint edited", content = "Complaint filed by employee " + empCompl.fname + " " + empCompl.lname + " has been changed.", date = DateTime.Now.ToString(), employeeToID = empCompl.empId, isRead = false, employeeFromID = -1 };
             _context.Messages.Add(msg);
             await _context.SaveChangesAsync();
+            ViewData["EmpType"] = emp.employeeType;
             return View(compl);
         }
 
@@ -78,38 +86,66 @@ namespace HR_Management.Controllers
             var CurrentComplaintList = _context.Complaints.Where(x => x.empId == emp.empId);
             ViewData["CurrentEmployeeComplaints"] = new SelectList(CurrentComplaintList);
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
-		public IActionResult OutstandingComplaints()
-		{
+		public async Task<IActionResult> OutstandingComplaints()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             //If logged in user is HR, lists all company complaints
-			ViewData["Message"] = "Page to view all the team complaints.";
+            ViewData["Message"] = "Page to view all the team complaints.";
             var AllCompanyComplaints = _context.Complaints;
             ViewData["AllComplaints"] = new SelectList(AllCompanyComplaints);
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
-		public IActionResult EditComplaintStatus()
-		{
-			ViewData["Message"] = "Page to edit complaint status.";
+		public async Task<IActionResult> EditComplaintStatus()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to edit complaint status.";
+            ViewData["EmpType"] = emp.employeeType;
 
-			return View();
+            return View();
 		}
 
-		public IActionResult TeamMemberComplaints()
-		{
-			ViewData["Message"] = "Page to edit complaint status.";
-
-			return View();
+		public async Task<IActionResult> TeamMemberComplaints()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to edit complaint status.";
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
         [HttpGet]
-        public IActionResult AddComplaint()
-		{
-			ViewData["Message"] = "Page to add a complaints.";
+        public async Task<IActionResult> AddComplaint()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to add a complaints.";
+            ViewData["EmpType"] = emp.employeeType;
 
-			return View();
+            return View();
 		}
 
 
@@ -134,6 +170,7 @@ namespace HR_Management.Controllers
             Messages msg = new Messages { title = "Complaint filed", content = "Complaint filed by employee " + emp.fname + " " + emp.lname + ".", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = -1 };
             _context.Messages.Add(msg);
             await _context.SaveChangesAsync();
+            ViewData["EmpType"] = emp.employeeType;
             return RedirectToAction(nameof(ComplaintsController.ComplaintsIndex), "Complaints");
         }
         public IActionResult Error()

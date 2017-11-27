@@ -52,6 +52,7 @@ namespace HR_Management.Controllers
             ViewData["Employee"] = emp;
             ViewData["Manager"] = mgr;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 
 		}
@@ -70,28 +71,47 @@ namespace HR_Management.Controllers
             ViewData["FullRankedEmployees"] = new SelectList(RankedEmployees);
             ViewData["Manager"] = mgr;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
-		public IActionResult ManagerRankingIndex()
-		{
-			ViewData["Message"] = "Page to view all the rankings in the company.";
-
-			return View();
+        public async Task<IActionResult> ManagerRankingIndex()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to view all the rankings in the company.";
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
-		public IActionResult EmployeeRankingIndex()
-		{
-			ViewData["Message"] = "Page to view all the rankings in the company.";
-
-			return View();
+        public async Task<IActionResult> EmployeeRankingIndex()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to view all the rankings in the company.";
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
-		public IActionResult DepartmentRankingIndexHR()
-		{
-			ViewData["Message"] = "Page to view all the rankings in the company.";
-
-			return View();
+        public async Task<IActionResult> DepartmentRankingIndexHR()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to view all the rankings in the company.";
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
 		public IActionResult Error()

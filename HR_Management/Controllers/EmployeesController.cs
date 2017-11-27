@@ -76,38 +76,54 @@ namespace HR_Management.Controllers
             emp.isTerminated = true;
             _context.Entry(emp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             await _context.SaveChangesAsync();
+            ViewData["EmpType"] = emp.employeeType;
             return RedirectToAction(nameof(EmployeesController.EmployeeList), "Employees");
         }
 
         public async Task<ActionResult>  EmployeeList()
         {
-            ViewData["Message"] = "Page to list all employees.";
+
             var user = await GetCurrentUserAsync();
             if (user == null)
             {
                 return View("Error");
             }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             var AllEmployees = _context.Employee.OrderBy(c => c.empId).ToList();
             var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c=>c.empId, d=>d.empId, (c,d)=>new EmployeeListClass{ empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank=c.rank, email=c.email});
             ViewData["AllEmployees"] = new SelectList(EmployeeInfo1);
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 
 
-        public IActionResult ViewNotice()
+        public async Task<IActionResult> ViewNotice()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to view an employee's two week notice.";
-
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 
 
 
-        public IActionResult ViewTerminatedEmployees()
+        public async Task<IActionResult> ViewTerminatedEmployees()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to view all terminated employees.";
             var TerminatedEmployees = _context.Employee.Where(x => x.isTerminated == true || x.status == "Terminated").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).ToList();
             ViewData["TerminatedEmployees"] = new SelectList(TerminatedEmployees);
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 

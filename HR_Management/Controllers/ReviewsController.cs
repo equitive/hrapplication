@@ -34,15 +34,23 @@ namespace HR_Management.Controllers
             ViewData["Review"] = rev;
             ViewData["Employee"] = emp;
             ViewData["Manager"] = mgr;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 
         }
 
         [HttpGet]
-        public IActionResult EditReview(int ID)
+        public async Task<IActionResult> EditReview(int ID)
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to edit a review.";
             Reviews review = _context.Reviews.Where(x => x.ID == ID).First();
+            ViewData["EmpType"] = emp.employeeType;
             return View(review);
         }
 
@@ -74,6 +82,7 @@ namespace HR_Management.Controllers
             ViewData["CurrentEmployee"] = emp;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["TotalReviews"] = totalReviews;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
@@ -91,6 +100,7 @@ namespace HR_Management.Controllers
             new RevMgrJoined { ID = c.ID, empdepartment = d.department, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date).Where(b => b.empdepartment == emp.department);
             ViewData["Reviews"] = new SelectList(reviews);
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
@@ -103,14 +113,21 @@ namespace HR_Management.Controllers
             ViewData["AllReviews"] = new SelectList(allReviews);
             ViewData["CurrentEmployee"] = emp;
             ViewData["CurrentManager"] = mgr;
-			return View();
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
         [HttpGet]
-        public IActionResult AddReview()
+        public async Task<IActionResult> AddReview()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to add a review.";
-
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 

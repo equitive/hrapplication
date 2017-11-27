@@ -26,7 +26,13 @@ namespace HR_Management.Controllers
         }
 
         public async Task<IActionResult> ViewMessage(int ID)
-		{
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             Messages message = _context.Messages.Where(x => x.ID == ID).First();
             
             
@@ -37,6 +43,7 @@ namespace HR_Management.Controllers
             ViewData["EmpTo"] = empto.fname + " " + empto.lname;
             message.isRead = true;
             _context.Entry(message).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            ViewData["EmpType"] = emp.employeeType;
             await _context.SaveChangesAsync();
             return View();
         }
@@ -59,7 +66,8 @@ namespace HR_Management.Controllers
             ViewData["MessageCountRead"] = countRead;
             ViewData["MessageCountUnread"] = countUnread;
             ViewData["Message"] = "Page to view all messages.";
-			return View();
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
 		public IActionResult MessagesIndexManager()
@@ -70,10 +78,17 @@ namespace HR_Management.Controllers
 		}
 
         [HttpGet]
-		public IActionResult AddMessage()
-		{
-			ViewData["Message"] = "Page to add a message.";
+        public async Task<IActionResult> AddMessage()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to add a message.";
             ViewData["Error"] = "";
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 

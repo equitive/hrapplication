@@ -38,6 +38,7 @@ namespace HR_Management.Controllers
             ViewData["salary"] = pst.salary;
             ViewData["manager"] = mgr.fname + " " + mgr.lname;
             ViewData["jobTitle"] = pst.jobTitle;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
@@ -59,6 +60,7 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Employee"] = emp;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
@@ -101,6 +103,7 @@ namespace HR_Management.Controllers
             ViewData["manager"] = mgr.fname + " " + mgr.lname;
             ViewData["jobTitle"] = pst.jobTitle;
             ViewData["Employees"] = new SelectList(employees);
+            ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 

@@ -40,7 +40,8 @@ namespace HR_Management.Controllers
             ViewData["Employees"] = new SelectList(employees);
             ViewData["Manager"] = mgr;
             ViewData["totalTeam"] = total;
-			return View();
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 		public IActionResult EditTeamMember()
 		{
@@ -49,16 +50,23 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
-		public IActionResult ViewTeamMember(int ID)
-		{
+        public async Task<IActionResult> ViewTeamMember(int ID)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             //Show the info the selected Team Member
-			ViewData["Message"] = "Page to view one team member.";
+            ViewData["Message"] = "Page to view one team member.";
             var ChosenEmployee = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(x => x.empID == ID).First();
             Employee ChosenEmployee2 = _context.Employee.Where(x => x.empId == ID).First();
             Employee mgr = _context.Employee.Where(x => x.empId == ChosenEmployee.managerID).First();
             ViewData["ChosenEmployee"] = ChosenEmployee;
             ViewData["ChosenEmployee2"] = ChosenEmployee2;
             ViewData["ChosenManager"] = mgr;
+            ViewData["EmpType"] = emp.employeeType;
 
             return View();
 		}
@@ -76,6 +84,7 @@ namespace HR_Management.Controllers
             ViewData["Message"] = "Page to view team manager/hr view.";
             ViewData["Employees"] = new SelectList(employees);
             ViewData["Manager"] = mgr;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 

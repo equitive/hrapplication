@@ -25,18 +25,32 @@ namespace HR_Management.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult ViewTimeOff(int ID)
-		{
-			ViewData["Message"] = "Page to view a specific time off.";
+        public async Task<IActionResult> ViewTimeOff(int ID)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to view a specific time off.";
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
             ViewData["Timeoff"] = timeoff;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
         [HttpGet]
-        public IActionResult EditTimeOff(int ID)
-		{
-			ViewData["Message"] = "Page to edit a time off.";
+        public async Task<IActionResult> EditTimeOff(int ID)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to edit a time off.";
+            ViewData["EmpType"] = emp.employeeType;
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
             return View(timeoff);
 		}
@@ -78,7 +92,7 @@ namespace HR_Management.Controllers
             }
             _context.Entry(timeoff).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
+            ViewData["EmpType"] = emp.employeeType;
 
 
             return RedirectToAction(nameof(TimeOffController.OutstandingTimeOff), "TimeOff");
@@ -96,6 +110,7 @@ namespace HR_Management.Controllers
             var timeofs = _context.TimeOff.Where(x => x.empId == emp.empId);
             ViewData["TimeOffs"] = new SelectList(timeofs);
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
@@ -118,14 +133,21 @@ namespace HR_Management.Controllers
             var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
             ViewData["AllTimeoffs"] = new SelectList(AllTimeoffs);
+            ViewData["EmpType"] = emp.employeeType;
             return View();
 		}
 
-		public IActionResult ExceedingTimeOff()
-		{
-			ViewData["Message"] = "Page to view all the time off requests.";
-
-			return View();
+		public async Task<IActionResult> ExceedingTimeOff()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["Message"] = "Page to view all the time off requests.";
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
 		public IActionResult TeamMemberTimeOff(int id)
@@ -135,7 +157,8 @@ namespace HR_Management.Controllers
             var allTimeOff = _context.TimeOff.Where(z => z.empId == id);
             ViewData["CurrentEmployee"] = emp;
             ViewData["AllTimeOff"] = new SelectList(allTimeOff);
-			return View();
+            ViewData["EmpType"] = emp.employeeType;
+            return View();
 		}
 
         [HttpGet]
