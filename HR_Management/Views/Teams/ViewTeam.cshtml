@@ -89,8 +89,8 @@
                                    {
                                     <tr>
                                         <td><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></td>
-                                        <td>@employee.fname @employee.lname</td>
-                                        <td>@employee.jobTitle</td>
+                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@employee.empID"> @employee.fname @employee.lname </a></td>
+                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@employee.empID">  @employee.jobTitle </a></td>
                                         <td>@employee.email</td>
                                         <td>@employee.phoneNumber </td>
                                     </tr>

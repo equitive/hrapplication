@@ -118,7 +118,7 @@ namespace HR_Management.Controllers
 		}
 
         [HttpGet]
-        public async Task<IActionResult> AddReview()
+        public async Task<IActionResult> AddReview(int ID = -1)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -128,6 +128,7 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["Message"] = "Page to add a review.";
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["empidtopopulate"] = ID == -1 ? "" : ID + "";
             return View();
         }
 
