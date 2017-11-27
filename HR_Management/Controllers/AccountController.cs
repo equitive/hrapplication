@@ -69,7 +69,7 @@ namespace HR_Management.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation(1, "User logged in.");
+                    _logger.LogInformation(1, "User logged in.");                  
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -302,9 +302,14 @@ namespace HR_Management.Controllers
         // GET: /Account/ResetPassword
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null)
+        public async Task<IActionResult> ResetPassword(string code = null)
         {
-            return code == null ? View("Error") : View();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (code == null)
+            {
+                code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            }
+            return View();
         }
 
         //

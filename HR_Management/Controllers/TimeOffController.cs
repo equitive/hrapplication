@@ -41,6 +41,22 @@ namespace HR_Management.Controllers
 		}
 
         [HttpGet]
+        public async Task<IActionResult> DeleteTimeOff(int ID)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpType"] = emp.employeeType;
+            TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
+            _context.TimeOff.Remove(timeoff);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> EditTimeOff(int ID)
         {
             var user = await GetCurrentUserAsync();
@@ -192,6 +208,11 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
+            if(startDate > endDate)
+            {
+                ViewData["Error"] = "Start date cannot be after end date";
+                return View();
+            }
             ViewData["Message"] = "Page to add a time off.";
             TimeOff newtoff = new TimeOff();
             newtoff.approve = false; newtoff.description = description; newtoff.empId = emp.empId; newtoff.endDate = endDate.ToString();

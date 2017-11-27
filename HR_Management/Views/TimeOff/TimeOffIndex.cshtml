@@ -68,9 +68,13 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> View Time Off</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> Total Sick Days: </b> @ViewBag.CurrentEmployee.sickTime days <i>(-@ViewBag.TotalSickDays pending)</i>
+                                                    <b> Total Sick Days: </b> @ViewBag.CurrentEmployee.sickTime days
 													<br>
-                                                    <b> Total Vacation Days: </b> @ViewBag.CurrentEmployee.vacationDays days <i>(-@ViewBag.TotalVacationDays pending)</i>
+                                                    <b> Total Vacation Days: </b> @ViewBag.CurrentEmployee.vacationDays days
+                                                    <br />
+                                                    <b> Total Pending Sick Leaves: </b> @ViewBag.TotalSickDays pending request(s).
+                                                    <br />
+                                                    <b> Total Pending Vacation Leaves:</b> @ViewBag.TotalVacationDays pending request(s).
                                                     <br>
 													<br>
 													<a asp-area="" asp-controller="TimeOff" asp-action="AddTimeOff" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Request Time Off </a>
@@ -175,6 +179,7 @@
                                         <td><center><a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff"><i class="fa fa-pencil-square-o"></i></a>  |  <i class="fa fa-trash-o"></i></center></td>
                                     </tr>*@
                                 </table>
+                                <b style="color: red"> @ViewBag.Deleted</b>
                             </div>
                         </div>
                     </div>

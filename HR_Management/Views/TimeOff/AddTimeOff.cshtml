@@ -63,6 +63,7 @@
                                                 <br>
                                                 <div class="card-text w3-text-grey">
                                                     <form class="form-horizontal" asp-action="AddTimeOff">
+                                                        <b style="color: red">@ViewBag.Error</b>
                                                         <h4 class="w3-text-grey"> Complete all fields to request time off.</h4>
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
@@ -70,7 +71,7 @@
                                                             <label class="col-md-2 control-label">Type of time-off: </label>
                                                             <div class="col-md-10">
 																<select class="form-control" name="type">
-                                                                  <option value="Sick Leave">Sick Leave</option>
+                                                                  <option value="Sick Day">Sick Day</option>
                                                                   <option value="Vacation">Vacations</option>
                                                                 </select>
                                                                 <span class="text-danger"></span>
