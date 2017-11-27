@@ -13,7 +13,7 @@
           <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:50px">
         </div>
         <div class="w3-col s9 w3-bar">
-          <span>Welcome, <strong>Ike</strong></span><br>
+          <span>Welcome, <strong>@ViewBag.CurrentEmployee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
@@ -32,7 +32,7 @@
           {
           <div id="demoAcc" class="w3-show w3-white">
               <a href="#" class="w3-bar-item w3-button w3-grey">Personal Time Off</a>
-              <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">Time Off Requests</a>
+              <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">My Team: Time Off Requests</a>
           </div>
           }
         <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
@@ -68,9 +68,9 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> View Time Off</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> Total Sick Days: </b> 30 days <i>(-3 pending)</i>
+                                                    <b> Total Sick Days: </b> @ViewBag.CurrentEmployee.sickTime days <i>(-@ViewBag.TotalSickDays pending)</i>
 													<br>
-                                                    <b> Total Vacation Days: </b> 10 days <i>(-2 pending)</i>
+                                                    <b> Total Vacation Days: </b> @ViewBag.CurrentEmployee.vacationDays days <i>(-@ViewBag.TotalVacationDays pending)</i>
                                                     <br>
 													<br>
 													<a asp-area="" asp-controller="TimeOff" asp-action="AddTimeOff" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Request Time Off </a>
@@ -90,14 +90,14 @@
                         <div class="row py-9">
                             <div class="card py-2">
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Time Off Requests (7)</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Time Off Requests (@ViewBag.TotalRequests)</h5></li>
                                 </div>
                                 <table class="table table-striped" style="width: 1200px;">
                                     <tr>
-                                        <th>Vacation Type</th>
-                                        <th>Vacation Description</th>
-                                        <th>Vacation Start</th>
-                                        <th>Vacation End</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Start</th>
+                                        <th>End</th>
                                         <th>Approved</th>
                                         <th>Edit/Delete</th>
                                     </tr>                                 
