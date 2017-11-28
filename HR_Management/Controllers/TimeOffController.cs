@@ -115,7 +115,7 @@ namespace HR_Management.Controllers
             ViewData["EmpType"] = emp.employeeType;
 
 
-            return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
+            return RedirectToAction(nameof(TimeOffController.OutstandingTimeOff), "TimeOff");
         }
 
         public async Task<IActionResult> TimeOffIndex()
