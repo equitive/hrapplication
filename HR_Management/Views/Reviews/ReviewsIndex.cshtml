@@ -16,7 +16,7 @@
         <div class="w3-col s9 w3-bar">
           <span>Welcome, <strong>@ViewBag.CurrentEmployee.fname</strong></span><br>
           <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-envelope"></i></a>
-          <a asp-area="" asp-controller="AccountDetails" asp-action="AccountOverviewEditView" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
+          <a asp-area="" asp-controller="AccountDetails" asp-action="EditAccountOverviewEmployee" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
         </div>
       </div>
@@ -34,7 +34,10 @@
         {
             <div id="demoAcc" class="w3-show w3-white">
                 <a href="#" class="w3-bar-item w3-button w3-grey">Personal Reviews</a>
+                @if (ViewBag.EmpType == 1 || ViewBag.EmpType == 4)
+                {
                 <a asp-area="" asp-controller="Reviews" asp-action="TeamReviews" class="w3-bar-item w3-button">Team Reviews</a>
+                }
             </div>
         }
         <a asp-area="" asp-controller="Complaints" asp-action="ComplaintsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullhorn fa-fw"></i>  Complaints</a>
@@ -77,6 +80,10 @@
                         
                         <div class="row py-9">
                             <div class="card py-2">
+                                @if (ViewBag.ShowAdd)
+                                {
+                                    <a class="w3-bar-item w3-button w3-text-white" style="background-color: #009688; margin-bottom: 20px;" asp-area="" asp-controller="Reviews" asp-action="AddReview"> Add Review </a>
+                                }
                                 <div class="card-block">
                                       <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Reviews (@ViewBag.TotalReviews)</h5></li>
                                 </div>
