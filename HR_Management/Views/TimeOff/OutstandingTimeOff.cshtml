@@ -15,7 +15,7 @@
         </div>
         <div class="w3-col s9 w3-bar">
           <span>Welcome, <strong>@ViewBag.CurrentEmployee.fname</strong></span><br>
-          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
+          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="EditAccountOverviewEmployee" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
         </div>
@@ -31,11 +31,14 @@
         <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-calendar fa-fw"></i>  Time Off</a>
           <div id="demoAcc" class="w3-show w3-white">
             <a asp-area="" asp-controller="TimeOff" asp-action="TimeOffIndex" class="w3-bar-item w3-button">Personal Time Off</a>
-            <a href="#" class="w3-bar-item w3-button w3-grey">My Team: Time Off Requests</a>
-              @if (ViewBag.EmpType == 2 || ViewBag.EmpType == 4)
-            {
-                <a asp-area="" asp-controller="TimeOff" asp-action="ExceedingTimeOff" class="w3-bar-item w3-button">(HR) Exceeding Time Off Requests</a>
+              @if (ViewBag.EmpType == 1 || ViewBag.EmpType == 4)
+              {
+                <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">Team Time Off Requests</a>
               }
+            @if (ViewBag.EmpType == 2 || ViewBag.EmpType == 4)
+            {
+                <a asp-area="" asp-controller="TimeOff" asp-action="ExceedingTimeOff" class="w3-bar-item w3-button">Exceeding Time Off</a>
+            }
 
           </div>
         <a asp-area="" asp-controller="Reviews" asp-action="reviewsindex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>
