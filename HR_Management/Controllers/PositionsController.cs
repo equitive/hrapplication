@@ -34,6 +34,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var positions = _context.PositionInfo.Where(z => z.empId == emp.empId).Join(_context.Employee, c => c.managerID, d => d.empId, (c, d) =>
                 new PosMgrJoined { status = c.status, startDate = c.startDate, endDate = c.endDate, salary = c.salary, jobTitle = c.jobTitle, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(y => y.startDate);
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
@@ -58,6 +59,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view add positions.";
             ViewData["empId"] = ID;
             ViewData["EmpType"] = emp.employeeType;
@@ -101,6 +103,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view edit positions.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -114,6 +117,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view edit positions.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -127,6 +131,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit complaint status.";
             Employee empA = _context.Employee.Where(z => z.empId == id).First();
             var positions = _context.PositionInfo.Where(z => z.empId == id).Join(_context.Employee, c => c.managerID, d => d.empId, (c, d) =>
@@ -147,6 +152,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var employees = _context.Employee.Where(x => x.department == emp.department).Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { posstartdate = d.startDate.ToString(), salary = d.salary, empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, status = d.status, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).Where(v => v.status == true).ToList();
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["Employees"] = new SelectList(employees);

@@ -31,6 +31,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             PositionInfo pst = _context.PositionInfo.Where(x => x.empId == emp.empId && x.status == true).First();
             ViewData["EmpType"] = emp.employeeType;
@@ -59,6 +60,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Employee"] = emp;
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -75,6 +77,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             emp.fname = fname;
             emp.lname = lname;
             emp.address = address;
@@ -94,6 +97,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             PositionInfo pst = _context.PositionInfo.Where(x => x.empId == emp.empId && x.status == true).First();
             var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(v => v.department == emp.department);

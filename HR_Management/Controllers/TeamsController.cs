@@ -31,8 +31,9 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId,department = c.department}).Where(v => v.department == emp.department);
-            Employee mgr = _context.Employee.Where(y => y.department == emp.department && y.employeeType == 1).First();
+            Employee mgr = _context.Employee.Where(y => y.department == emp.department && (y.employeeType == 1 || y.employeeType == 4)).First();
             int total= _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId, department = c.department }).Where(v => v.department == emp.department).Count();
 
             ViewData["Message"] = "Page to view all team members.";
@@ -58,6 +59,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             //Show the info the selected Team Member
             ViewData["Message"] = "Page to view one team member.";
             var ChosenEmployee = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(x => x.empID == ID).First();
@@ -79,6 +81,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID=c.empId }).Where(v => v.department == emp.department);
             Employee mgr = _context.Employee.Where(y => y.department == emp.department && y.employeeType == 1).First();
             ViewData["Message"] = "Page to view team manager/hr view.";

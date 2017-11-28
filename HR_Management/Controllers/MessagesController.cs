@@ -33,6 +33,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Messages message = _context.Messages.Where(x => x.ID == ID).First();
             
             
@@ -57,6 +58,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var messages = _context.Messages.Where(x => x.employeeToID == emp.empId).Join(_context.Employee, c => c.employeeFromID, d => d.empId, (c, d) => new MessageFromClass { messageID = c.ID, fnameFrom = d.fname, lnameFrom = d.lname, date = c.date, title = c.content, content = c.content, isRead = c.isRead}).OrderBy(c => c.date);
             var countRead = messages.Where(x => x.isRead == true).Count();
             var countUnread = messages.Where(x => x.isRead == false).Count();
@@ -86,6 +88,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to add a message.";
             ViewData["Error"] = "";
             ViewData["EmpType"] = emp.employeeType;
@@ -103,6 +106,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Messages msg = new Messages();
             msg.content = description;
             msg.title = title;

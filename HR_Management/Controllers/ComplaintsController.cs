@@ -32,6 +32,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view a specific time off.";
             Complaints complaint = _context.Complaints.Where(x => x.ID == ID).First();
             Employee cmpfrom = _context.Employee.Where(x => x.empId == complaint.empId).First();
@@ -51,6 +52,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Complaints compl = _context.Complaints.Where(x => x.ID == ID).First();
             Employee empCompl = _context.Employee.Where(x => x.empId == compl.empId).First();
             ViewData["ShowStatusChange"] = compl.empId == emp.empId ? false : emp.employeeType == 0 ? false : true;
@@ -83,6 +85,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var CurrentComplaintList = _context.Complaints.Where(x => x.empId == emp.empId);
             ViewData["CurrentEmployeeComplaints"] = new SelectList(CurrentComplaintList);
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
@@ -98,6 +101,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             //If logged in user is HR, lists all company complaints
             ViewData["Message"] = "Page to view all the team complaints.";
             var AllCompanyComplaints = _context.Complaints;
@@ -114,6 +118,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit complaint status.";
             ViewData["EmpType"] = emp.employeeType;
 
@@ -128,6 +133,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit complaint status.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -142,6 +148,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to add a complaints.";
             ViewData["EmpType"] = emp.employeeType;
 
@@ -158,6 +165,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to add a time off.";
             Complaints complaint = new Complaints();
             complaint.date = DateTime.Now.ToString();

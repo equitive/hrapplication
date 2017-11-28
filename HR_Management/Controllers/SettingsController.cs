@@ -33,6 +33,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["EmpType"] = emp.employeeType;
             ViewData["Message"] = "Your application settings overview page.";
 
@@ -47,6 +48,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["EmpType"] = emp.employeeType;
             ViewData["Message"] = "Quit Job.";
 

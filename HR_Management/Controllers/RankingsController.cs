@@ -46,6 +46,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             var DeptRankedEmployees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department=c.department, employeeType=c.employeeType}).OrderBy(c => c.rank).Where(v => v.department == emp.department);
             ViewData["DeptRankedEmployees"] = new SelectList(DeptRankedEmployees);
@@ -66,6 +67,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department = c.department, employeeType = c.employeeType }).OrderBy(c=>c.rank);
             ViewData["FullRankedEmployees"] = new SelectList(RankedEmployees);
@@ -83,6 +85,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the rankings in the company.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -96,6 +99,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the rankings in the company.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -109,6 +113,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the rankings in the company.";
             ViewData["EmpType"] = emp.employeeType;
             return View();

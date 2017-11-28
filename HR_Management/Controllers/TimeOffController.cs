@@ -33,6 +33,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view a specific time off.";
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
             ViewData["Timeoff"] = timeoff;
@@ -49,6 +50,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["EmpType"] = emp.employeeType;
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
             _context.TimeOff.Remove(timeoff);
@@ -65,6 +67,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit a time off.";
             ViewData["EmpType"] = emp.employeeType;
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
@@ -91,6 +94,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             TimeOff timeoff = _context.TimeOff.Where(x => x.ID == ID).First();
             Employee empTimeoff = _context.Employee.Where(x => x.empId == timeoff.empId).First();
             if (approve == 1)
@@ -123,6 +127,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var timeofs = _context.TimeOff.Where(x => x.empId == emp.empId);
             int timeoffsTotal= _context.TimeOff.Where(x => x.empId == emp.empId).Count();
             int VacationDays = _context.TimeOff.Where(x => x.empId == emp.empId && x.type =="Vacation").Count();
@@ -153,6 +158,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var CurrentTeam = _context.Employee.Where(x => x.managerID == emp.ID);
             var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
@@ -174,6 +180,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the time off requests.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -207,6 +214,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
             if(startDate > endDate)
             {

@@ -222,20 +222,20 @@ namespace HR_Management.Data
 			{
                 var messages = new Messages[]
                 {
-                new Messages{title="Lorem", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=0, date="10/31/2016", isRead=true},
-                new Messages{title="Ipsum", content="labore et dolore magna aliqua.", employeeFromID=14, employeeToID=4, date="04/28/2014", isRead=false},
-                new Messages{title="Dolor", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=10, date="01/5/2012", isRead=true},
-                new Messages{title="Sit", content="labore et dolore magna aliqua.", employeeFromID=14, employeeToID=9, date="02/28/2014", isRead=false},
-                new Messages{title="Amet", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=6, date="06/30/2017", isRead=true},
-                new Messages{title="Consectetur", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=9, date="11/20/2009", isRead=false},
-                new Messages{title="Adipiscing", content="labore et dolore magna aliqua.", employeeFromID=7, employeeToID=8, date="05/15/2013", isRead=false},
-                new Messages{title="Elit", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=5, date="04/03/2012", isRead=true},
-                new Messages{title="Sed", content="labore et dolore magna aliqua.", employeeFromID=7, employeeToID=10, date="09/09/2010", isRead=false},
-                new Messages{title="Do", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=0, date="08/15/2011", isRead=false},
-                new Messages{title="Eiusmod", content="labore et dolore magna aliqua.", employeeFromID=11, employeeToID=10, date="10/31/2013", isRead=true},
-                new Messages{title="Tempor", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=11, date="07/06/2012", isRead=true},
-                new Messages{title="Incididunt", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=10, date="10/04/2008", isRead=false},
-                new Messages{title="Ut", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=9, date="10/31/2016", isRead=false},
+                new Messages{title="Lorem", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=0, date="10/31/2016 10:20:50 AM", isRead=true},
+                new Messages{title="Ipsum", content="labore et dolore magna aliqua.", employeeFromID=14, employeeToID=4, date="04/28/2014 10:20:50 AM", isRead=false},
+                new Messages{title="Dolor", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=10, date="01/5/2012 10:20:50 AM", isRead=true},
+                new Messages{title="Sit", content="labore et dolore magna aliqua.", employeeFromID=14, employeeToID=9, date="02/28/2014 10:20:50 AM", isRead=false},
+                new Messages{title="Amet", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=6, date="06/30/2017 10:20:50 AM", isRead=true},
+                new Messages{title="Consectetur", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=9, date="11/20/2009 10:20:50 AM", isRead=false},
+                new Messages{title="Adipiscing", content="labore et dolore magna aliqua.", employeeFromID=7, employeeToID=8, date="05/15/2013 10:20:50 AM", isRead=false},
+                new Messages{title="Elit", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=5, date="04/03/2012 10:20:50 AM", isRead=true},
+                new Messages{title="Sed", content="labore et dolore magna aliqua.", employeeFromID=7, employeeToID=10, date="09/09/2010 10:20:50 AM", isRead=false},
+                new Messages{title="Do", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=0, date="08/15/2011 10:20:50 AM", isRead=false},
+                new Messages{title="Eiusmod", content="labore et dolore magna aliqua.", employeeFromID=11, employeeToID=10, date="10/31/2013 10:20:50 AM", isRead=true},
+                new Messages{title="Tempor", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=11, date="07/06/2012 10:20:50 AM", isRead=true},
+                new Messages{title="Incididunt", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=10, date="10/04/2008 10:20:50 AM", isRead=false},
+                new Messages{title="Ut", content="labore et dolore magna aliqua.", employeeFromID=4, employeeToID=9, date="10/31/2016 10:20:50 AM", isRead=false},
 
                 };
                 foreach (Messages m in messages)

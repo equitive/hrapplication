@@ -48,6 +48,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit a review.";
             Reviews review = _context.Reviews.Where(x => x.ID == ID).First();
             ViewData["CurrentReview"] = review;
@@ -75,6 +76,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var reviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
             new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).Where(z=>z.ID==emp.ID).OrderBy(y => y.date) ;
             int totalReviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
@@ -97,6 +99,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var reviews = _context.Reviews.Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
             new RevMgrJoined { ID = c.ID, empdepartment = d.department, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderBy(y => y.date).Where(b => b.empdepartment == emp.department);
             int totalReviews = _context.Reviews.Join(_context.Employee, c => c.empId, d => d.empId, (c, d) =>
@@ -130,6 +133,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to add a review.";
             ViewData["EmpType"] = emp.employeeType;
             ViewData["empidtopopulate"] = ID == -1 ? "" : ID + "";
@@ -145,6 +149,7 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee empreviewed = _context.Employee.Where(x => x.empId == empId).First();
             ViewData["Message"] = "Page to add a time off.";
             Reviews review = new Reviews();
