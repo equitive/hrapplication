@@ -94,6 +94,7 @@ namespace HR_Management.Controllers
             var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email });
             ViewData["AllEmployees"] = new SelectList(EmployeeInfo1);
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["EmpCount"] = EmployeeInfo1.Count();
             return View();
         }
 

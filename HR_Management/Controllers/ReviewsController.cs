@@ -156,6 +156,9 @@ namespace HR_Management.Controllers
             if(score > 100 || score < 0)
             {
                 ViewData["Error"] = "Score must be between 0 and 100 inclusive";
+                ViewData["EmpType"] = emp.employeeType;
+                ViewData["Employees"] = new SelectList(_context.Employee.Where(x => x.department == emp.department));
+                ViewData["empidtopopulate"] = -1;
                 return View();
             }
             Reviews review = new Reviews();
