@@ -32,7 +32,14 @@
           {
           <div id="demoAcc" class="w3-show w3-white">
               <a href="#" class="w3-bar-item w3-button w3-grey">Personal Time Off</a>
-              <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">My Team: Time Off Requests</a>
+                @if (ViewBag.EmpType == 1 || ViewBag.EmpType == 4)
+                {
+                <a asp-area="" asp-controller="TimeOff" asp-action="OutstandingTimeOff" class="w3-bar-item w3-button">Team Time Off Requests</a>
+                }
+                @if (ViewBag.EmpType == 2 || ViewBag.EmpType == 4)
+                    {
+                      <a asp-area="" asp-controller="TimeOff" asp-action="ExceedingTimeOff" class="w3-bar-item w3-button">Exceeding Time Off</a>
+                    }
           </div>
           }
         <a asp-area="" asp-controller="Reviews" asp-action="ReviewsIndex" class="w3-bar-item w3-button w3-padding"><i class="fa fa-comment-o fa-fw"></i>  Reviews</a>

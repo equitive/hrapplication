@@ -115,7 +115,7 @@ namespace HR_Management.Controllers
             ViewData["EmpType"] = emp.employeeType;
 
 
-            return RedirectToAction(nameof(TimeOffController.OutstandingTimeOff), "TimeOff");
+            return RedirectToAction(nameof(TimeOffController.TimeOffIndex), "TimeOff");
         }
 
         public async Task<IActionResult> TimeOffIndex()
@@ -180,6 +180,11 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            var AllEmployees = _context.Employee;
+            var PendingReviews = _context.TimeOff.Where(v => v.approve == 1).Join(AllEmployees, c => c.empId, d => d.empId, (c, d) =>
+            new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
+
+            ViewData["PendingReviews"] = new SelectList(PendingReviews);
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the time off requests.";
             ViewData["EmpType"] = emp.employeeType;
