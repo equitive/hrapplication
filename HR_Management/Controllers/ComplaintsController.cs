@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR_Management.Controllers
 {
-	public class ComplaintsController : Controller
-	{
+    public class ComplaintsController : Controller
+    {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
@@ -76,9 +76,9 @@ namespace HR_Management.Controllers
         }
 
         public async Task<IActionResult> ComplaintsIndex()
-		{
+        {
             //Lists regular employee complaints
-			ViewData["Message"] = "Page to view all the complaints.";
+            ViewData["Message"] = "Page to view all the complaints.";
             var user = await GetCurrentUserAsync();
             if (user == null)
             {
@@ -91,9 +91,9 @@ namespace HR_Management.Controllers
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["EmpType"] = emp.employeeType;
             return View();
-		}
+        }
 
-		public async Task<IActionResult> OutstandingComplaints()
+        public async Task<IActionResult> OutstandingComplaints()
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -108,9 +108,9 @@ namespace HR_Management.Controllers
             ViewData["AllComplaints"] = new SelectList(AllCompanyComplaints);
             ViewData["EmpType"] = emp.employeeType;
             return View();
-		}
+        }
 
-		public async Task<IActionResult> EditComplaintStatus()
+        public async Task<IActionResult> EditComplaintStatus()
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -123,9 +123,9 @@ namespace HR_Management.Controllers
             ViewData["EmpType"] = emp.employeeType;
 
             return View();
-		}
+        }
 
-		public async Task<IActionResult> TeamMemberComplaints()
+        public async Task<IActionResult> TeamMemberComplaints(int ID = -1)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -133,6 +133,8 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            var allComplaints = _context.Complaints.Where(z => z.empId == ID);
+            ViewData["Complaints"] = new SelectList(allComplaints);
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to edit complaint status.";
             ViewData["EmpType"] = emp.employeeType;

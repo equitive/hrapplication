@@ -181,7 +181,7 @@
                                     @if (ViewBag.EmpType == 2 || ViewBag.EmpType == 4)
                                     {
                                         <a asp-area="" asp-controller="Complaints" asp-action="TeamMemberComplaints" asp-route-id="@ViewBag.ChosenEmployee.empID" class="w3-bar-item w3-button w3-padding"><li class="list-group-item card-title w3-text-grey" style="width: 30rem;"><center><h5><i class="fa fa-pencil-square-o"></i> (HR) View Complaints</h5></center></li></a>
-                                        <a asp-area="" asp-controller="Messages" asp-action="AddMessage" asp-route-id="@ViewBag.ChosenEmployee.empID" class="w3-bar-item w3-button w3-padding"><li class="list-group-item card-title w3-text-grey" style="width: 30rem;"><center><h5><i class="fa fa-pencil-square-o"></i> (HR) Notify Manager</h5></center></li></a>
+                                        <a asp-area="" asp-controller="Messages" asp-action="AddMessage" asp-route-id="@ViewBag.ChosenManager.empId" class="w3-bar-item w3-button w3-padding"><li class="list-group-item card-title w3-text-grey" style="width: 30rem;"><center><h5><i class="fa fa-pencil-square-o"></i> (HR) Notify Manager</h5></center></li></a>
                                         <a asp-area="" asp-controller="Employees" asp-action="ApproveTermination" asp-route-id="@ViewBag.ChosenEmployee.empID" class="w3-bar-item w3-button w3-padding"><li class="list-group-item card-title w3-text-grey" style="width: 30rem;"><center><h5><i class="fa fa-pencil-square-o"></i> (HR) Terminate</h5></center></li></a>
                                     }
                                 </div>

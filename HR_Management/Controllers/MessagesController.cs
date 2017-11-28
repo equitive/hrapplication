@@ -80,7 +80,7 @@ namespace HR_Management.Controllers
 		}
 
         [HttpGet]
-        public async Task<IActionResult> AddMessage()
+        public async Task<IActionResult> AddMessage(int ID = -1)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -93,6 +93,7 @@ namespace HR_Management.Controllers
             ViewData["Error"] = "";
             ViewData["EmpType"] = emp.employeeType;
             ViewData["Employees"] = new SelectList(_context.Employee);
+            ViewData["empidtopopulate"] = ID;
             return View();
         }
 

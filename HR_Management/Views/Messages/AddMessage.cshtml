@@ -109,3 +109,12 @@
         </div> 
     </div>
 </div>
+@section Scripts {
+    <script>
+        if (@ViewBag.empidtopopulate != -1) {
+            var num = @ViewBag.empidtopopulate;
+            console.log(num);
+            $('#empId option[value="' + num + '"]').prop('selected', true);
+        }
+    </script>
+}

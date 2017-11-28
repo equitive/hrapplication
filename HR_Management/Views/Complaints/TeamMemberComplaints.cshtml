@@ -81,14 +81,13 @@
                                         <th>Status</th>
                                         <th>Edit Complaint Status</th>
                                     </tr>
-                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.CurrentManagerComplaints.Items)
+                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Complaints.Items)
                                     {
                                         <tr>
                                             <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">@employee.title</a></td>
                                             <td>@employee.date</td>
                                             <td>@employee.status</td>
-                                            <th><center><a asp-area="" asp-controller="Complaints"><i class="fa fa-pencil-square-o"></i></a></center></th>
-
+                                            <th><center><a asp-area="" asp-controller="Complaints" asp-action="EditComplaint" asp-route-id="@employee.ID"><i class="fa fa-pencil-square-o"></i></a></center></th>
                                         </tr>
                                     }
 

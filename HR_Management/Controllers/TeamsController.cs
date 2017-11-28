@@ -64,7 +64,7 @@ namespace HR_Management.Controllers
             ViewData["Message"] = "Page to view one team member.";
             var ChosenEmployee = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, empID = c.empId }).Where(x => x.empID == ID).First();
             Employee ChosenEmployee2 = _context.Employee.Where(x => x.empId == ID).First();
-            Employee mgr = _context.Employee.Where(x => x.empId == ChosenEmployee.managerID).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == ChosenEmployee2.managerID).First();
             ViewData["ChosenEmployee"] = ChosenEmployee;
             ViewData["ChosenEmployee2"] = ChosenEmployee2;
             ViewData["ChosenManager"] = mgr;
