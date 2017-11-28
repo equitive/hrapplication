@@ -138,7 +138,11 @@ namespace HR_Management.Controllers
             Employee empA = _context.Employee.Where(z => z.empId == id).First();
             var positions = _context.PositionInfo.Where(z => z.empId == id).Join(_context.Employee, c => c.managerID, d => d.empId, (c, d) =>
                 new PosMgrJoined { status = c.status, startDate = c.startDate, endDate = c.endDate, salary = c.salary, jobTitle = c.jobTitle, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(y => y.startDate);
+            int total = _context.PositionInfo.Where(z => z.empId == id).Join(_context.Employee, c => c.managerID, d => d.empId, (c, d) =>
+                new PosMgrJoined { status = c.status, startDate = c.startDate, endDate = c.endDate, salary = c.salary, jobTitle = c.jobTitle, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(y => y.startDate).Count();
+
             ViewData["Positions"] = new SelectList(positions);
+            ViewData["total"] = total;
             ViewData["CurrentEmployee"] = empA;
             ViewData["EmpType"] = emp.employeeType;
             return View();

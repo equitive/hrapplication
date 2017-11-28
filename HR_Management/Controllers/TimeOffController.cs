@@ -191,14 +191,19 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult TeamMemberTimeOff(int id)
+		public async Task<ActionResult> TeamMemberTimeOff(int id)
 		{
-			ViewData["Message"] = "Page to edit complaint status.";
+            var user = await GetCurrentUserAsync();
+            ViewData["Message"] = "Page to edit complaint status.";
+            Employee user1 = _context.Employee.Where(z => z.appuserid == user.Id).First();
+            ViewData["loggedIn"] = user1.fname + " " + user1.lname;
             Employee emp = _context.Employee.Where(z => z.empId == id).First();
             var allTimeOff = _context.TimeOff.Where(z => z.empId == id);
+            int total = _context.TimeOff.Where(z => z.empId == id).Count();
             ViewData["CurrentEmployee"] = emp;
             ViewData["AllTimeOff"] = new SelectList(allTimeOff);
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["total"] = total;
             return View();
 		}
 
