@@ -111,12 +111,21 @@ namespace HR_Management.Controllers
             return View();
 		}
 
-		public IActionResult TeamMemberReviews(int id)
+		public async Task<ActionResult> TeamMemberReviews(int id)
 		{
-			ViewData["Message"] = "Page to edit complaint status.";
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee user1 = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["loggedIn"] = user1; 
+            ViewData["Message"] = "Page to edit complaint status.";
             Employee emp = _context.Employee.Where(z => z.empId == id).First();
             Employee mgr = _context.Employee.Where(z => z.empId == emp.managerID).First();
             var allReviews = _context.Reviews.Where(z => z.empId == id);
+            int total = _context.Reviews.Where(z => z.empId == id).Count();
+            ViewData["total"] = total;
             ViewData["AllReviews"] = new SelectList(allReviews);
             ViewData["CurrentEmployee"] = emp;
             ViewData["CurrentManager"] = mgr;
