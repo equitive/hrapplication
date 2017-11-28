@@ -57,14 +57,14 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3><i class="fa fa-cog fa-fw"></i> Quit Position</h3></li>
                                                 <br>
                                             </div>
-                                                <form>
+                                                <form asp-action="QuitJob">
                                                     <h4 class="w3-text-grey"> Submit Your Two Week Notice</h4>
                                                     <hr />
                                                     <div asp-validation-summary="All" class="text-danger"></div>
                                                     <div>
                                                         <label class="control-label"></label>
                                                         <div >
-                                                            <textarea rows="4" cols="500" class="form-control" placeholder="Enter Notice Here"> </textarea>
+                                                            <textarea rows="4" cols="500" name="notice" id="notice" class="form-control" placeholder="Enter Notice Here"> </textarea>
                                                             <span class="text-danger"></span>
                                                         </div>
                                                     </div>

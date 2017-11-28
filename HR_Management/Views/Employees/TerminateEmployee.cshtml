@@ -82,29 +82,22 @@
                                         <th>Photo</th>
                                         <th>Employee Name</th>
                                         <th>Position</th>
-                                        <th>Manager</th>
-                                        <th>Status</th>
+                                        <th>Department</th>
                                         <th>View Notice</th>
                                         <th>Terminate</th>
-                                    </tr>                                   
-                                    <tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
-                                        <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Ike Tocode </a> </td>
-                                        <td>Senior Software Developer</td>
-                                        <td>Ove Tomanage</td>
-                                        <td>Good Standing</td>
-                                        <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice"> View Notice </a> </td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
-									<tr>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"><img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"></a></td>
-                                        <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember"> Thomas R. Etheridge</a></td>
-                                        <td>Software Developer</td>
-                                        <td>Ove Tomanage</td>
-    									<td>Good Standing</td>
-                                        <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice"> View Notice </a> </td>
-                                        <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination"><i class="fa fa-hand-peace-o"></i></a></center></td>
-                                    </tr>
+                                    </tr>    
+                                    @foreach (var emp in ViewBag.Employees.Items)
+                                    {
+                                        <tr>
+                                            <td><a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@emp.empID"> <img src="~/images/profile.png" class="w3-circle w3-margin-right" style="width:30px"> </a> </td>
+                                            <td> <a asp-area="" asp-controller="Teams" asp-action="ViewTeamMember" asp-route-id="@emp.empID">@emp.fname @emp.lname </a> </td>
+                                            <td>@emp.jobTitle</td>
+                                            <td>@emp.department</td>
+                                            <td> <a asp-area="" asp-controller="Employees" asp-action="ViewNotice" asp-route-id="@emp.empID"> View Notice </a> </td>
+                                            <td><center><a asp-area="" asp-controller="Employees" asp-action="ApproveTermination" asp-route-id="@emp.empID"><i class="fa fa-hand-peace-o"></i></a></center></td>
+                                        </tr>
+
+                                    }
                                 </table>
                             </div>
                         </div>

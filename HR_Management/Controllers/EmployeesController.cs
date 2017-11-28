@@ -38,11 +38,11 @@ namespace HR_Management.Controllers
         public async Task<IActionResult> AddEmployee(string fname, string lname, string address, string email, string jobTitle, string jobDescription, string password, string salary, string phoneNumber, string status, string department, int emptype)
         {
             var user = new ApplicationUser { UserName = email, Email = email };
-            
+
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
-                var employeetype = department == "Human Resources" ? (emptype == 1 ? 4 : 2) : (emptype == 1 ? 1 : 0 );
+                var employeetype = department == "Human Resources" ? (emptype == 1 ? 4 : 2) : (emptype == 1 ? 1 : 0);
                 var mgrid = _context.Employee.Where(x => x.department == department && (x.employeeType == 1 || x.employeeType == 3 || x.employeeType == 2 || x.employeeType == 4)).First().empId;
                 var newempid = _context.Employee.OrderByDescending(x => x.empId).First().empId + 1;
                 var newrank = _context.Employee.OrderByDescending(x => x.rank).First().rank + 1;
@@ -61,7 +61,7 @@ namespace HR_Management.Controllers
         public IActionResult ApproveTermination(int id)
         {
             ViewData["Message"] = "Page to terminate employees that request to Quit.";
-            ViewData["ID"] = id; 
+            ViewData["ID"] = id;
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace HR_Management.Controllers
             return RedirectToAction(nameof(EmployeesController.EmployeeList), "Employees");
         }
 
-        public async Task<ActionResult>  EmployeeList()
+        public async Task<ActionResult> EmployeeList()
         {
 
             var user = await GetCurrentUserAsync();
@@ -91,14 +91,14 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var AllEmployees = _context.Employee.OrderBy(c => c.empId).ToList();
-            var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c=>c.empId, d=>d.empId, (c,d)=>new EmployeeListClass{ empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank=c.rank, email=c.email});
+            var EmployeeInfo1 = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { empid = c.empId, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email });
             ViewData["AllEmployees"] = new SelectList(EmployeeInfo1);
             ViewData["EmpType"] = emp.employeeType;
             return View();
         }
 
 
-        public async Task<IActionResult> ViewNotice()
+        public async Task<IActionResult> ViewNotice(int ID)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -106,7 +106,12 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee noticeEmp = _context.Employee.Where(x => x.empId == ID).First();
+            Employee mgr = _context.Employee.Where(x => x.empId == noticeEmp.managerID).First();
+            ViewData["Notice"] = noticeEmp.twoWeeksNotice;
+            ViewData["ManagerName"] = mgr.fname + " " + mgr.lname;
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
+            ViewData["EmployeeName"] = noticeEmp.fname + " " + noticeEmp.lname;
             ViewData["Message"] = "Page to view an employee's two week notice.";
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -127,6 +132,21 @@ namespace HR_Management.Controllers
             var TerminatedEmployees = _context.Employee.Where(x => x.isTerminated == true || x.status == "Terminated").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).ToList();
             ViewData["TerminatedEmployees"] = new SelectList(TerminatedEmployees);
             ViewData["EmpType"] = emp.employeeType;
+            return View();
+        }
+
+        public async Task<IActionResult> TerminateEmployee()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
+            ViewData["EmpType"] = emp.employeeType;
+            var emps = _context.Employee.Where(x => x.isTerminated == false && x.twoWeeksNotice != "").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { status = d.status, empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).Where( v => v.status == true);
+            ViewData["Employees"] = new SelectList(emps);
             return View();
         }
 

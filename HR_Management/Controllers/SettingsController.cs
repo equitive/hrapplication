@@ -40,6 +40,7 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
+        [HttpGet]
 		public async Task<IActionResult> QuitJob()
         {
             var user = await GetCurrentUserAsync();
@@ -55,9 +56,24 @@ namespace HR_Management.Controllers
 			return View();
 		}
 
+        [HttpPost]
+        public async Task<IActionResult> QuitJob(string notice)
+        {
+            var user = await GetCurrentUserAsync();
+            if (user == null)
+            {
+                return View("Error");
+            }
+            Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            emp.twoWeeksNotice = notice;
+            emp.terminationReason = "Employee quit job.";
+            _context.Entry(emp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AccountDetailsController.AccountOverview), "AccountDetails");
+        }
 
 
-		public IActionResult Error()
+            public IActionResult Error()
 		{
 			return View();
 		}
