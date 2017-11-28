@@ -183,7 +183,9 @@ namespace HR_Management.Controllers
             var AllEmployees = _context.Employee;
             var PendingReviews = _context.TimeOff.Where(v => v.approve == 1).Join(AllEmployees, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
-
+            int total = _context.TimeOff.Where(v => v.approve == 1).Join(AllEmployees, c => c.empId, d => d.empId, (c, d) =>
+            new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID).Count();
+            ViewData["total"] = total;
             ViewData["PendingReviews"] = new SelectList(PendingReviews);
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all the time off requests.";
