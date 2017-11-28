@@ -152,6 +152,11 @@ namespace HR_Management.Controllers
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee empreviewed = _context.Employee.Where(x => x.empId == empId).First();
             ViewData["Message"] = "Page to add a time off.";
+            if(score > 100 || score < 0)
+            {
+                ViewData["Error"] = "Score must be between 0 and 100 inclusive";
+                return View();
+            }
             Reviews review = new Reviews();
             review.date = DateTime.Now.ToString();
             review.title = title;

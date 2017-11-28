@@ -15,7 +15,7 @@ namespace HR_Management.Models.HRModels
         public string startDate { get; set; }
         public string endDate { get; set; }
         public string description { get; set; }
-        public bool approve { get; set; }
+        public int approve { get; set; }
         public string type { get; set; }
     }
 }

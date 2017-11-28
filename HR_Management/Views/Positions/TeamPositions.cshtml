@@ -65,7 +65,6 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-envelope"></i>  View Positions</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> <a asp-area="" asp-controller="Positions" asp-action="AddPosition" class="w3-bar-item w3-button w3-padding w3-blue"> Change an employee's position </a></b>
                                                     <br>
                                                 </div>
                                                 <br>
@@ -87,6 +86,7 @@
 										<th>Date</th>
                                         <th>Position Title</th>
                                         <th>Salary</th>
+                                        <th>Change Position</th>
                                     </tr>  
                                     @foreach (var position in (IEnumerable<dynamic>)ViewBag.Employees.Items)
                                     {

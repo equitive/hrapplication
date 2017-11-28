@@ -112,12 +112,25 @@
                                             <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff" asp-route-id="@timeoff.ID">@timeoff.description</a></td>
                                             <td>@timeoff.startDate</td>
                                             <td>@timeoff.endDate</td>
-                                            <td>@timeoff.approve</td>
+                                            @if (timeoff.approve == 1)
+                                            {
+                                                <td>Pending</td>
+                                            }
+                                            else if (timeoff.approve == 2)
+                                            {
+                                                <td>Rejected</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Approved</td>
+                                            }
                                             <td>
                                                 <center>
-                                                <a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff" asp-route-id="@timeoff.ID"><i class="fa fa-pencil-square-o"></i></a>  
-                                                |  
-                                                <a asp-area="" asp-controller="TimeOff" asp-action="DeleteTimeOff" asp-route-id="@timeoff.ID"> <i class="fa fa-trash-o"></i></a>  
+                                                    @if (timeoff.approve == 1)
+                                                    {
+                                                        <a asp-area="" asp-controller="TimeOff" asp-action="EditTimeOff" asp-route-id="@timeoff.ID"><i class="fa fa-pencil-square-o"></i></a>
+                                                        <a asp-area="" asp-controller="TimeOff" asp-action="DeleteTimeOff" asp-route-id="@timeoff.ID"><i class="fa fa-pencil-square-o"></i></a>
+                                                    }
                                                 </center>
                                             </td>
                                         </tr>

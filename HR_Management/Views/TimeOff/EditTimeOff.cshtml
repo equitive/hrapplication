@@ -71,7 +71,7 @@
                                                         <input type="hidden" asp-for="empId" />
                                                         <input type="hidden" asp-for="approve" />
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Type of time-off:</label>
                                                             <div class="col-md-10">
                                                                 <select asp-for="type" class="form-control">
                                                                   <option value="Sick Day">Sick Day</option>
@@ -81,24 +81,22 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Description:</label>
                                                             <div class="col-md-10">
                                                                 <input asp-for="description" class="form-control" />
                                                                 <span asp-validation-for="description" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Start Date:</label>
                                                             <div class="col-md-10">
-                                                                <input asp-for="startDate" type="date" class="form-control" />
-                                                                <span asp-validation-for="startDate" class="text-danger"></span>
+                                                                @Html.EditorFor(model => model.startDate, new { @type = "date" })
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">End Date:</label>
                                                             <div class="col-md-10">
-                                                                <input asp-for="endDate" type="date"  class="form-control" />
-                                                                <span asp-validation-for="endDate" class="text-danger"></span>
+                                                                @Html.EditorFor(model => model.endDate, new { @type = "date" })
                                                             </div>
                                                         </div>
                                                         <div class="form-group">

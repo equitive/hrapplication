@@ -102,13 +102,13 @@ namespace HR_Management.Controllers
                 Messages msg = new Messages { title = "Time-off approved", content = "Your request for time-off was approved", date = DateTime.Now.ToString(), employeeToID = empTimeoff.empId, isRead = false, employeeFromID = emp.empId };
                 _context.Messages.Add(msg);
                 await _context.SaveChangesAsync();
-                timeoff.approve = true;
+                timeoff.approve = 3;
             } else
             {
                 Messages msg = new Messages { title = "Time-off rejected", content = "Your request for time-off was rejected", date = DateTime.Now.ToString(), employeeToID = empTimeoff.empId, isRead = false, employeeFromID = emp.empId };
                 _context.Messages.Add(msg);
                 await _context.SaveChangesAsync();
-                timeoff.approve = false;
+                timeoff.approve = 2;
             }
             _context.Entry(timeoff).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -159,10 +159,10 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
-            var CurrentTeam = _context.Employee.Where(x => x.managerID == emp.ID);
-            var AllTimeoffs = _context.TimeOff.Where(v => v.approve == false).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
+            var CurrentTeam = _context.Employee.Where(x => x.department == emp.department);
+            var AllTimeoffs = _context.TimeOff.Where(v => v.approve == 1).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID);
-            int totalRows =_context.TimeOff.Where(v => v.approve == false).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
+            int totalRows =_context.TimeOff.Where(v => v.approve == 1).Join(CurrentTeam, c => c.empId, d => d.empId, (c, d) =>
             new TimeoffEmployeeJoined { ID = c.ID, approved = c.approve, startDate = c.startDate, endDate = c.endDate, type = c.type, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).OrderByDescending(b => b.ID).Count();
             ViewData["TotalRows"] = totalRows;
             ViewData["CurrentEmployee"] = emp;
@@ -223,7 +223,7 @@ namespace HR_Management.Controllers
             }
             ViewData["Message"] = "Page to add a time off.";
             TimeOff newtoff = new TimeOff();
-            newtoff.approve = false; newtoff.description = description; newtoff.empId = emp.empId; newtoff.endDate = endDate.ToString();
+            newtoff.approve = 1; newtoff.description = description; newtoff.empId = emp.empId; newtoff.endDate = endDate.ToString();
             newtoff.startDate = startDate.ToString(); newtoff.type = type;
             _context.TimeOff.Add(newtoff);
             await _context.SaveChangesAsync();

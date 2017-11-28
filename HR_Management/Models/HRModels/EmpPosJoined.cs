@@ -61,6 +61,6 @@ namespace HR_Management.Models.HRModels
         public string description { get; set; }
         public string mgrfname { get; set; }
         public string mgrlname { get; set; }
-        public bool approved { get; set; }
+        public int approved { get; set; }
     }        
 }
