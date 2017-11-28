@@ -78,7 +78,7 @@
                         <div class="row py-9">
                             <div class="card py-2">
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>Positions (2)</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>Positions (@ViewBag.total)</h5></li>
                                 </div>
                                 <table class="table table-striped" style="width: 1200px;">
                                     <tr>
@@ -88,20 +88,17 @@
                                         <th>Manager</th>
                                         <th>Salary</th>
                                     </tr>  
+                                    
+                                   @foreach (var currentPosition in ViewBag.AllPositions.Items)
+                                   {
                                     <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>January 10, 2016</td>
-                                        <td>Senior Software Developer</td>
-                                        <td>Gon Retire</td>
-                                        <td>$120,000</td>
+                                        <td>@currentPosition.fname @currentPosition.lname</td>
+                                        <td>@currentPosition.posstartdate</td>
+                                        <td>@currentPosition.jobTitle</td>
+                                        <td>@currentPosition.managerID</td>
+                                        <td>@currentPosition.salary</td>
                                     </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>April 1, 2007</td>
-                                        <td>Junior Developer</td>
-                                        <td>Felix M. Hedegaard</td>
-                                        <td>$60,000</td>
-                                    </tr>
+                                   }
                                 </table>
                             </div>
                         </div>

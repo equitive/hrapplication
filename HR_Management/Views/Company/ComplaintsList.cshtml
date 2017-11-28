@@ -75,7 +75,7 @@
                         <div class="row py-9">
                             <div class="card py-2">
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Complaints (5)</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Complaints (@ViewBag.TotalComplaints)</h5></li>
                                 </div>
                                   <table class="table table-striped" style="width: 1200px;">
                                     <tr>
@@ -92,36 +92,7 @@
                                             <td>@complaint.status</td>
                                         </tr>
                                      }
-                                    @*<tr>
-                                        <td>Ike Tocode</td>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Low Salary</a></td>
-                                        <td>September 17, 2017</td>
-                                        <td>Pending</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Complaint about 2017 Review</a></td>
-                                        <td>May 17, 2017</td>
-                                        <td>Investigation in Progress</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Lazy Manager</a></td>
-                                        <td>May 29, 2016</td>
-                                        <td>Resolved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">Complaint about 2015 Review</a></td>
-                                        <td>May 1, 2015</td>
-                                        <td>Resolved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td><a asp-area="" asp-controller="Complaints" asp-action="ViewComplaint">2014 Denied Vacation</a></td>
-                                        <td>February 15, 2014</td>
-                                        <td>Resolved</td>
-                                    </tr>*@
+                                    
                                 </table>
                             </div>
                         </div>

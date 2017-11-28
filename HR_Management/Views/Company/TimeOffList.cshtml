@@ -74,7 +74,7 @@
                         <div class="row py-9">
                             <div class="card py-2">
                                 <div class="card-block">
-                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Time Off Requests (7)</h5></li>
+                                      <li class="list-group-item active card-title" style="width: 101rem;"><h5>All Time Off Requests (@ViewBag.total)</h5></li>
                                 </div>
                                 <table class="table table-striped" style="width: 1200px;">
                                     <tr>
@@ -93,7 +93,7 @@
                                             <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff" asp-route-id="@timeoff.ID">@timeoff.description</a></td>
                                             <td>@timeoff.startDate</td>
                                             <td>@timeoff.endDate</td>
-                                            @if (timeoff.approved)
+                                            @if (timeoff.approved==3)
                                             {
                                                 <td>Approved</td>
                                             }
@@ -103,62 +103,6 @@
                                             }
                                         </tr>
                                     }
-                                    @*<tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Vacation</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Going to Paris.</a></td>
-                                        <td>Sepetember 30, 2018</td>
-                                        <td>October 3, 2018</td>
-                                        <td>Pending</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Sick</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Taking care of my dying grandmother.</a></td>
-                                        <td>July 29, 2018</td>
-                                        <td>August 1, 2018</td>
-                                        <td>Pending</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Sick</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Doctor's Appointment</a></td>
-                                        <td>November 10, 2017</td>
-                                        <td>November 10, 2017</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Vacation</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Holiday Vacation 2016</a></td>
-                                        <td>December 1, 2016</td>
-                                        <td>December 23, 2016</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Vacation</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Chicago Trip</a></td>
-                                        <td>May 15, 2015</td>
-                                        <td>May 21, 2015</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Sick</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Head Cold & Fever</a>td>
-                                        <td>February 14, 2015</td>
-                                        <td>February 14, 2015</td>
-                                        <td>Denied</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ike Tocode</td>
-                                        <td>Vacation</td>
-                                        <td><a asp-area="" asp-controller="TimeOff" asp-action="ViewTimeOff">Backpacking South America</a></td>
-                                        <td>March 31, 2014</td>
-                                        <td>July 21, 2014</td>
-                                        <td>Denied</td>
-                                    </tr>*@
                                 </table>
                             </div>
                         </div>
