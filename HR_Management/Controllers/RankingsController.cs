@@ -47,13 +47,14 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
-            Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
-            var DeptRankedEmployees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department=c.department, employeeType=c.employeeType}).OrderBy(c => c.rank).Where(v => v.department == emp.department);
+            Employee mgr = _context.Employee.Where(x => x.department == emp.department && (x.employeeType == 1 || x.employeeType == 4)).First();
+            var DeptRankedEmployees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { posStatus = d.status, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department=c.department, employeeType=c.employeeType}).OrderBy(c => c.rank).Where(v => v.department == emp.department && v.posStatus == true);
             ViewData["DeptRankedEmployees"] = new SelectList(DeptRankedEmployees);
             ViewData["Employee"] = emp;
             ViewData["Manager"] = mgr;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["CountOfEmp"] = DeptRankedEmployees.Count();
             return View();
 
 		}
@@ -74,6 +75,7 @@ namespace HR_Management.Controllers
             ViewData["Manager"] = mgr;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["CountOfEmp"] = RankedEmployees.Count();
             return View();
 		}
 
