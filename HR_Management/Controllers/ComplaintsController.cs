@@ -133,11 +133,15 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee chosen = _context.Employee.Where(x => x.empId == ID).First();
             var allComplaints = _context.Complaints.Where(z => z.empId == ID);
+            int total = _context.Complaints.Where(z => z.empId == ID).Count();
             ViewData["Complaints"] = new SelectList(allComplaints);
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
+            ViewData["ChosenEmployee"] = chosen;
             ViewData["Message"] = "Page to edit complaint status.";
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["total"] = total;
             return View();
 		}
 

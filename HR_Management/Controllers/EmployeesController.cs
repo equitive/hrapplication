@@ -131,6 +131,8 @@ namespace HR_Management.Controllers
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view all terminated employees.";
             var TerminatedEmployees = _context.Employee.Where(x => x.isTerminated == true || x.status == "Terminated").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).ToList();
+            int total = _context.Employee.Where(x => x.isTerminated == true || x.status == "Terminated").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).ToList().Count();
+            ViewData["total"] = total ;
             ViewData["TerminatedEmployees"] = new SelectList(TerminatedEmployees);
             ViewData["EmpType"] = emp.employeeType;
             return View();
@@ -148,6 +150,8 @@ namespace HR_Management.Controllers
             ViewData["EmpType"] = emp.employeeType;
             var emps = _context.Employee.Where(x => x.isTerminated == false && x.twoWeeksNotice != "").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { status = d.status, empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).Where( v => v.status == true);
             ViewData["Employees"] = new SelectList(emps);
+            int total = _context.Employee.Where(x => x.isTerminated == false && x.twoWeeksNotice != "").Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { status = d.status, empID = c.empId, fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, department = c.department, managerID = c.managerID }).Where(v => v.status == true).Count();
+            ViewData["total"] = total;
             return View();
         }
 
