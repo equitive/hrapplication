@@ -35,7 +35,10 @@
         {
             <div id="demoAcc" class="w3-show w3-white">
                 <a href="#" class="w3-bar-item w3-button w3-grey">Personal Positions</a>
+                @if (ViewBag.EmpType == 1 || ViewBag.EmpType == 4)
+                {
                 <a asp-area="" asp-controller="Positions" asp-action="TeamPositions" class="w3-bar-item w3-button">Team Positions</a>
+                }
             </div>
         }
           @if (ViewBag.EmpType == 2 || ViewBag.EmpType == 4)
