@@ -69,7 +69,7 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             Employee mgr = _context.Employee.Where(x => x.empId == emp.managerID).First();
-            var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department = c.department, employeeType = c.employeeType }).OrderBy(c=>c.rank);
+            var RankedEmployees =_context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmployeeListClass { posStatus = d.status, fname = c.fname, lname = c.lname, position = d.jobTitle, status = c.status, managerID = c.managerID, rank = c.rank, email = c.email, department = c.department, employeeType = c.employeeType }).Where( v => v.posStatus == true).OrderBy(c=>c.rank);
             ViewData["FullRankedEmployees"] = new SelectList(RankedEmployees);
             ViewData["Manager"] = mgr;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;

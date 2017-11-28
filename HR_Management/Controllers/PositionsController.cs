@@ -59,15 +59,17 @@ namespace HR_Management.Controllers
                 return View("Error");
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
+            Employee emp2 = _context.Employee.Where(x => x.empId == ID).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to view add positions.";
             ViewData["empId"] = ID;
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["EmployeeChanging"] = emp2.fname + " " + emp2.lname;
             return View();
 		}
 
         [HttpPost]
-        public async Task<IActionResult> AddPosition(string title, string description, int managerID, int empId, double salary)
+        public async Task<IActionResult> AddPosition(string title, string description, int empId, double salary)
         {
             var user = await GetCurrentUserAsync();
             if (user == null)
@@ -79,7 +81,7 @@ namespace HR_Management.Controllers
             ViewData["Message"] = "Page to view add positions.";
             Employee emp = _context.Employee.Where(x => x.empId == empId).First();
             PositionInfo pos = _context.PositionInfo.Where(x => x.empId == emp.empId).Where(y => y.status == true).First();
-            PositionInfo newpos = new PositionInfo { salary = salary, jobDescription = description, managerID = managerID, empId = emp.empId, jobTitle = title, startDate = DateTime.Now, endDate = null, status = true };
+            PositionInfo newpos = new PositionInfo { salary = salary, jobDescription = description, managerID = pos.managerID, empId = emp.empId, jobTitle = title, startDate = DateTime.Now, endDate = null, status = true };
             pos.status = false;
             pos.endDate = DateTime.Now;
             _context.Entry(pos).State = EntityState.Modified;
@@ -87,7 +89,7 @@ namespace HR_Management.Controllers
             _context.PositionInfo.Add(newpos);
             await _context.SaveChangesAsync();
             emp.jobTitle = newpos.ID;
-            emp.managerID = managerID;
+            emp.managerID = pos.managerID;
             _context.Entry(emp).State = EntityState.Modified;
             Messages msg = new Messages { title = "Your position has changed", content = "You have a new position within the company. Your job title is " + title + ".", date = DateTime.Now.ToString(), employeeToID = emp.empId, isRead = false, employeeFromID = emploggedin.empId };
             _context.Messages.Add(msg);

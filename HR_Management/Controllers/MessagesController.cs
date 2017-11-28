@@ -92,6 +92,7 @@ namespace HR_Management.Controllers
             ViewData["Message"] = "Page to add a message.";
             ViewData["Error"] = "";
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["Employees"] = new SelectList(_context.Employee);
             return View();
         }
 

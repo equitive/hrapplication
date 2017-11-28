@@ -136,6 +136,7 @@ namespace HR_Management.Controllers
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             ViewData["Message"] = "Page to add a review.";
             ViewData["EmpType"] = emp.employeeType;
+            ViewData["Employees"] = new SelectList(_context.Employee.Where(x => x.department == emp.department));
             ViewData["empidtopopulate"] = ID == -1 ? "" : ID + "";
             return View();
         }

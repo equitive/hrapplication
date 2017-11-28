@@ -14,7 +14,7 @@
         </div>
         <div class="w3-col s9 w3-bar">
           <span>Welcome @ViewBag.EmpLoggedInName</span><br>
-          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
+          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="EditAccountOverviewEmployee" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
         </div>
@@ -71,9 +71,14 @@
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label">Employee ID:</label>
+                                                            <label class="col-md-2 control-label">Review for:  </label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="number" name="empId" value="@ViewBag.empidtopopulate"  placeholder="Employee ID of recipient"/>
+                                                                <select class="form-control" name="empId" id="empId">
+                                                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                                                    {
+                                                                        <option value="@employee.empId">@employee.fname @employee.lname</option>
+                                                                    }
+                                                                </select>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -118,3 +123,12 @@
         </div> 
     </div>
 </div>
+@section Scripts {
+    <script>
+        if (@ViewBag.empidtopopulate != -1) {
+            var num = @ViewBag.empidtopopulate;
+            console.log(num);
+            $('#empId option[value="' + num + '"]').prop('selected', true);
+        }
+    </script>
+}

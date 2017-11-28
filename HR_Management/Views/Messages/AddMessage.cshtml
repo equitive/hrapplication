@@ -14,7 +14,7 @@
         </div>
         <div class="w3-col s9 w3-bar">
           <span>Welcome @ViewBag.EmpLoggedInName</span><br>
-          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndexManager" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
+          <a asp-area="" asp-controller="Messages" asp-action="MessagesIndex" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"><i class="fa fa-envelope"></i></a>
           <a asp-area="" asp-controller="AccountDetails" asp-action="EditAccountOverviewEmployee" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-user"></i></a>
           <a asp-area="" asp-controller="Settings" asp-action="SettingsOverview" class="w3-bar-item w3-button w3-text-teal"><i class="fa fa-cog"></i></a>
         </div>
@@ -64,21 +64,26 @@
                                                         <hr />
                                                         <div asp-validation-summary="All" class="text-danger"></div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Send message to:  </label>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text" name="empId" id="empId" placeholder="Employee ID"/>
+                                                                <select class="form-control" name="empId" id="empId">
+                                                                    @foreach (var employee in (IEnumerable<dynamic>)ViewBag.Employees.Items)
+                                                                    {
+                                                                        <option value="@employee.empId">@employee.fname @employee.lname</option>
+                                                                    }
+                                                                </select>
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Title: </label>
                                                             <div class="col-md-10">
                                                                 <input class="form-control" type="text" name="title" id="title" placeholder="Title" value="" />
                                                                 <span class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-md-2 control-label"></label>
+                                                            <label class="col-md-2 control-label">Content: </label>
                                                             <div class="col-md-10">
                                                                 <textarea rows="4" cols="500" name="description" id="description" class="form-control"> </textarea>
                                                                 <span class="text-danger"></span>

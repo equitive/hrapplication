@@ -32,7 +32,7 @@ namespace HR_Management.Controllers
             }
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
-            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId,department = c.department}).Where(v => v.department == emp.department);
+            var employees = _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined{ fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, status = d.status, empID = c.empId,department = c.department}).Where(v => v.department == emp.department && v.status == true);
             Employee mgr = _context.Employee.Where(y => y.department == emp.department && (y.employeeType == 1 || y.employeeType == 4)).First();
             int total= _context.Employee.Join(_context.PositionInfo, c => c.empId, d => d.empId, (c, d) => new EmpPosJoined { fname = c.fname, lname = c.lname, phoneNumber = c.phoneNumber, email = c.email, jobTitle = d.jobTitle, empID = c.empId, department = c.department }).Where(v => v.department == emp.department).Count();
 
