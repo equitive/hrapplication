@@ -78,9 +78,9 @@ namespace HR_Management.Controllers
             Employee emp = _context.Employee.Where(x => x.appuserid == user.Id).First();
             ViewData["EmpLoggedInName"] = emp.fname + " " + emp.lname;
             var reviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
-            new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).Where(z=>z.ID==emp.ID).OrderBy(y => y.date) ;
+            new RevMgrJoined { ID = c.empId, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).Where(z=>z.ID==emp.empId).OrderBy(y => y.date) ;
             int totalReviews = _context.Reviews.Join(_context.Employee, c => c.manager, d => d.empId, (c, d) =>
-            new RevMgrJoined { ID = c.ID, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).Where(z => z.ID == emp.ID).OrderBy(y => y.date).Count();
+            new RevMgrJoined { ID = c.empId, date = c.date, title = c.title, manager = c.manager, score = c.score, description = c.description, mgrfname = d.fname, mgrlname = d.lname }).Where(z => z.ID == emp.empId).OrderBy(y => y.date).Count();
             ViewData["Reviews"] = new SelectList(reviews);
             ViewData["CurrentEmployee"] = emp;
             ViewData["ShowAdd"] = emp.employeeType == 0 ? false : true;

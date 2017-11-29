@@ -75,14 +75,14 @@
                                                 <li class="list-group-item my-4 w3-text-teal card-title" style="width: 100rem;"><h3> <i class="fa fa-calendar fa-fw"></i> View Time Off</h3></li>
                                                 <br>
                                                 <div class="card-text w3-text-grey">
-                                                    <b> Total Sick Days: </b> @ViewBag.CurrentEmployee.sickTime days
+                                                    @*<b> Total Sick Days: </b> @ViewBag.CurrentEmployee.sickTime days
 													<br>
                                                     <b> Total Vacation Days: </b> @ViewBag.CurrentEmployee.vacationDays days
                                                     <br />
                                                     <b> Total Pending Sick Leaves: </b> @ViewBag.TotalSickDays pending request(s).
                                                     <br />
                                                     <b> Total Pending Vacation Leaves:</b> @ViewBag.TotalVacationDays pending request(s).
-                                                    <br>
+                                                    <br>*@
 													<br>
 													<a asp-area="" asp-controller="TimeOff" asp-action="AddTimeOff" class="w3-bar-item w3-button w3-text-white" style="background-color: #009688;"> Request Time Off </a>
                                                     @if (ViewBag.ShowAdd)
